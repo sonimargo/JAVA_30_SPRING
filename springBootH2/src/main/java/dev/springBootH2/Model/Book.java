@@ -1,4 +1,4 @@
-package dev.springBootH2;
+package dev.springBootH2.Model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -11,13 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="books")
+@Table(name="BOOKS")
 public class Book 
 {
     @Id	
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-	//private Long idBook;
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private Long idBook;    
     private String title;
 	private String ISBN;
 	private int pages;
@@ -57,6 +56,22 @@ public class Book
 	
 	
 	
+	public Long getIdBook() {
+		return idBook;
+	}
+
+	public void setIdBook(Long idBook) {
+		this.idBook = idBook;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
 	public String getTitle() {
 		return title;
 	}

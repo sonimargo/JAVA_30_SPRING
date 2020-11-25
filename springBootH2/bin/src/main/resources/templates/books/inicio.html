@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<style>
+	table , form {
+		margin:20px;
+		padding:10px;
+		border: 1px solid #1C6EA4;
+	  	background-color: #EEEEEE;
+	  	width: 60%;
+	  	text-align: left;
+	  	border-collapse: collapse;
+		}
+</style>
+
+</head>
+	<h2 align="center">BIBLIOTECA</h2>
+	<p align="center">Esto es proyecto biblioteca</p>
+
+<body>
+	<Br>
+	<p align="center" th:text="${serverTime}">Hora en servidor: </p>
+	<Br>
+	<p align="center" th:text="${mensaje}" style="color: blue"></p>
+	
+	<Br>
+	<Br>
+	<div align="center">
+		<table>
+			<tr>
+				<td><a th:href="@{/biblioteca/libros}">Listado de Libros</a></td>
+				<td><a th:href="@{/biblioteca/nuevoLibro}">Agregar libro a la Biblioteca</a></td>
+				<td><a th:href="@{/biblioteca/eliminaLibro}">Eliminar libro de la Biblioteca</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+	
+</html>

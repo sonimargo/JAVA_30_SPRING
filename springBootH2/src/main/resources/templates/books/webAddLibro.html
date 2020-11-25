@@ -18,6 +18,18 @@
 	  	border-collapse: collapse;
 	}
 	
+	.boton 
+	{
+        padding:10px 20px, 10px 20px; 
+        background: #1C6EA4;
+        color:white;
+        font:bold 10px/10px verdana;
+        width:100px;
+        cursor:pointer;
+        cursor:hand;
+        text-align:center;
+    }
+    
 </style>
 
 
@@ -45,9 +57,19 @@
 				<label for="year">Any:</label>
 				<input type="text" name="year" class="form-control" id="year" />
 			</div>
-						
-			<div class="form-group">
-				<input type="submit" value="ALTA" class="btn btn-primary" />
+			
+			<div th:object="${autor}">
+				<label>Seleccionar autor</label>
+				<select id="seleccionAutor" name="libroId">
+					<option th:value="0">No customer</option>
+					<option th:each="autor : ${autores}" th:value="${autor.idAutor}"
+					  		th:text="${autor.idAutor}+' : '+${autor.nombre}">
+					</option>
+				</select>	
+			</div>
+			
+			<div>
+				<input id="btnAltaLibro" class=boton type="submit" value="ALTA LIBRO"/>
 			</div>
 		</div>
 

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<style>
+	form { 
+		margin:20px;
+		padding:10px;
+		border: 1px solid #1C6EA4;
+	    background-color: #EEEEEE;
+	  	width: 60%;
+	  	text-align: left;
+	  	border-collapse: collapse;
+	}
+	
+</style>
+
+
+</head>
+
+	<h2 align="center">BIBLIOTECA</h2>
+	<p align="center">Esto es proyecto biblioteca</p>
+			
+<body>
+	<form action="insertarLibro">
+		<div class="form-group">
+			<label for="title">Titulo:</label> 
+			<input type="text" name="title" class="form-control" id="title" />
+
+			<div class="form-group">
+				<label for="ISBN">ISBN:</label>
+				<input type="text" name="ISBN" class="form-control" id="ISBN" />
+			</div>
+			<div class="form-group">
+				<label for="pages">Paginas:</label>
+				<input type="text" name="pages" class="form-control" id="pages" />
+			</div>
+
+			<div class="form-group">
+				<label for="year">Any:</label>
+				<input type="text" name="year" class="form-control" id="year" />
+			</div>
+						
+			<div class="form-group">
+				<input type="submit" value="ALTA" class="btn btn-primary" />
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>

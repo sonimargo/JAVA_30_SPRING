@@ -1,9 +1,12 @@
-package dev.springBootH2;
+package dev.springBootH2.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import dev.springBootH2.Model.Book;
+import dev.springBootH2.Repository.BookRepository;
 
 
 @Service

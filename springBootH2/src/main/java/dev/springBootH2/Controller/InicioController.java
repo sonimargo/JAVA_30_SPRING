@@ -1,4 +1,4 @@
-package dev.springBootH2;
+package dev.springBootH2.Controller;
 
 import java.text.DateFormat;
 import java.util.Date;
@@ -21,7 +21,7 @@ public class InicioController
 		//Para el objeto model, creamos atributo serverTime con la fecha del servidor, en formato String
 		//Con este objeto model se trabaja con Thymeleaf en la web.html 
 		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("mensaje", "Esta a punto de entrar en Biblioteca mini ...");
+		model.addAttribute("mensaje", "Esta a punto de entrar en Biblioteca Mini ...");
 		
 		return "books/inicio.html";
 	}

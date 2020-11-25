@@ -1,4 +1,4 @@
-package dev.springBootH2;
+package dev.springBootH2.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class Autor 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idAutor;
 	private String nombre;
 	

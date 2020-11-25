@@ -6,23 +6,7 @@
 <link rel="stylesheet" href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
 <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<!--
-<style>
-	head {
-		font-family: sans-serif;
-		font-style: bold;
-		font-size: 20pt;
-		margin:20px;
-		padding:10px;
-		border: 1px solid #1C6EA4;
-	  	background-color: #EEEEEE;
-	  	width: 60%;
-	  	text-align: left;
-	  	border-collapse: collapse;
-		}
-</style>
 
--->
 <!-- padding espacio arriba/dcha/abajo/izq #502121-->
 
 <style>
@@ -68,8 +52,8 @@
 </style>
 
 </head>
-	<h2 align="center">BIBLIOTECA</h2>
-	<p align="center">Esto es proyecto biblioteca</p>
+	<h2 align="center">BIBLIOTECA MINI</h2>
+	<p align="center">LISTA DE LIBROS EN BIBLIOTECA</p>
 		
 <div style="text-align: center">		
 		
@@ -81,12 +65,16 @@
 			<th>ISBN</th>
 			<th>Paginas</th>
 			<th>Anyo</th>	
+			<th>Autor</th>
+			<th>Accion</th>
 		</tr>
 		<tr th:each="book:${listalibros}">
 			<td th:text="${book.title}"></td>
 			<td th:text="${book.ISBN}"></td>
 			<td th:text="${book.pages}"></td>
 			<td th:text="${book.year}"></td>
+			<td th:text="${book.autor.nombre}"></td>
+			<td><a th:href="@{/GestionLibros/eliminaLibro(itemId=${itemAmount.product.id})}">Eliminar libro</a></td>			
 		</tr>
 	</table>
 
@@ -95,7 +83,7 @@
 
 	
 	<table>
-		<form action="biblioteca">
+		<form action="home">
 			<input id="btnHome" class=boton type="submit" value="Home"/>
 		</form>
 	
