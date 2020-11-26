@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<style>
+	form { 
+		margin:20px;
+		padding:10px;
+		border: 1px solid #1C6EA4;
+	    background-color: #EEEEEE;
+	  	width: 60%;
+	  	text-align: left;
+	  	border-collapse: collapse;
+	}
+	
+	.boton 
+	{
+        padding:10px 20px, 10px 20px; 
+        background: #1C6EA4;
+        color:white;
+        font:bold 10px/10px verdana;
+        width:100px;
+        cursor:pointer;
+        cursor:hand;
+        text-align:center;
+    }
+    
+</style>
+
+
+</head>
+
+	<h2 align="center">BIBLIOTECA Mini</h2>
+	<p align="center">Alta nuevo Autor</p>
+			
+<body>
+	<form action="insertarAutor">
+	
+		<div class="form-group">
+		
+			<label for="txtnombre">Nombre:   </label> 
+			<input type="text" name="nombre" class="form-control" id="txtnombre" />
+
+			<div class="form-group">
+				<label for="txtapellido">Apellido:  </label>
+				<input type="text" name="apellido1" class="form-control" id="txtapellido" />
+			</div>
+
+			
+			<div>
+				<input id="btnAltaAutor" class=boton type="submit" value="ALTA AUTOR"/>
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>

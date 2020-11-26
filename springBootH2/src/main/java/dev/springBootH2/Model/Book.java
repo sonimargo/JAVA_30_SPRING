@@ -1,6 +1,7 @@
 package dev.springBootH2.Model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ public class Book
 {
     @Id	
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "IDBOOK")
 	private Long idBook;    
     private String title;
 	private String ISBN;

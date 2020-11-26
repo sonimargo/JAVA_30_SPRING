@@ -35,35 +35,36 @@
 
 </head>
 
-	<h2 align="center">BIBLIOTECA</h2>
-	<p align="center">Esto es proyecto biblioteca</p>
+	<h2 align="center">BIBLIOTECA MINI</h2>
+	<p align="center">Alta nuevo Libro</p>
 			
 <body>
 	<form action="insertarLibro">
 		<div class="form-group">
-			<label for="title">Titulo:</label> 
-			<input type="text" name="title" class="form-control" id="title" />
+			<label for="txttitle">Titulo:</label> 
+			<input type="text" name="title" class="form-control" id="txttitle" />
 
 			<div class="form-group">
-				<label for="ISBN">ISBN:</label>
-				<input type="text" name="ISBN" class="form-control" id="ISBN" />
+				<label for="txtISBN">ISBN:</label>
+				<input type="text" name="ISBN" class="form-control" id="txtISBN" />
 			</div>
 			<div class="form-group">
-				<label for="pages">Paginas:</label>
-				<input type="text" name="pages" class="form-control" id="pages" />
+				<label for="txtpages">Paginas:</label>
+				<input type="text" name="pages" class="form-control" id="txtpages" />
 			</div>
 
 			<div class="form-group">
-				<label for="year">Any:</label>
-				<input type="text" name="year" class="form-control" id="year" />
+				<label for="txtyear">Any:</label>
+				<input type="text" name="year" class="form-control" id="txtyear" />
 			</div>
 			
 			<div th:object="${autor}">
 				<label>Seleccionar autor</label>
 				<select id="seleccionAutor" name="libroId">
 					<option th:value="0">No customer</option>
-					<option th:each="autor : ${autores}" th:value="${autor.idAutor}"
-					  		th:text="${autor.idAutor}+' : '+${autor.nombre}">
+					<option th:each="autor : ${comboAutores}" 
+					        th:value="${autor.id_Autor}"
+					  		th:text="${autor.id_Autor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
 					</option>
 				</select>	
 			</div>

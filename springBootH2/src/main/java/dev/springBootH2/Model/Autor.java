@@ -1,5 +1,6 @@
 package dev.springBootH2.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,17 +15,65 @@ public class Autor
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "IDAUTOR")
 	private Long idAutor;
 	private String nombre;
+	private String apellido1;
 	
+
+	@OneToOne
+	@JoinColumn (name = "FK_BOOK_ID", nullable = true, insertable = false, updatable = false)
+    private Book libro;
 	
 	public Autor() 
 	{
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
-	@OneToOne
-	@JoinColumn (name = "FK_BOOK_ID", updatable = false, nullable = true)
-    private Book libro;
+	public Autor(String nombre, String apellido1) 
+	{
+		super();
+		this.nombre = nombre;
+		this.apellido1 = apellido1;
+	}
+
+	
+	
+	
+	
+	public Long getId_Autor() {
+		return idAutor;
+	}
+
+	public void setId_Autor(Long id_Autor) {
+		this.idAutor = id_Autor;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellido1() {
+		return apellido1;
+	}
+
+	public void setApellido1(String apellido1) {
+		this.apellido1 = apellido1;
+	}
+
+	public Book getLibro() {
+		return libro;
+	}
+
+	public void setLibro(Book libro) {
+		this.libro = libro;
+	}
+
+	
+	
 	
 }

@@ -61,6 +61,7 @@
 	<table>
 	
 		<tr>
+			<th>id</th>
 			<th>Title</th>
 			<th>ISBN</th>
 			<th>Paginas</th>
@@ -69,12 +70,13 @@
 			<th>Accion</th>
 		</tr>
 		<tr th:each="book:${listalibros}">
+			<td th:text="${book.idBook}"></td>
 			<td th:text="${book.title}"></td>
 			<td th:text="${book.ISBN}"></td>
 			<td th:text="${book.pages}"></td>
 			<td th:text="${book.year}"></td>
 			<td th:text="${book.autor.nombre}"></td>
-			<td><a th:href="@{/GestionLibros/eliminaLibro(itemId=${itemAmount.product.id})}">Eliminar libro</a></td>			
+			<td><a th:href="@{/GestionLibros/archivarLibro(itemId=${itemAmount.product.id})}">Archivar libro</a></td>			
 		</tr>
 	</table>
 

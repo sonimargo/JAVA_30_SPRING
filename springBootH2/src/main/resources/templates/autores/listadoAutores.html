@@ -6,23 +6,7 @@
 <link rel="stylesheet" href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
 <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-<!--
-<style>
-	head {
-		font-family: sans-serif;
-		font-style: bold;
-		font-size: 20pt;
-		margin:20px;
-		padding:10px;
-		border: 1px solid #1C6EA4;
-	  	background-color: #EEEEEE;
-	  	width: 60%;
-	  	text-align: left;
-	  	border-collapse: collapse;
-		}
-</style>
-
--->
+<
 <!-- padding espacio arriba/dcha/abajo/izq #502121-->
 
 <style>
@@ -59,7 +43,7 @@
         left: 5%;
     }
         
-    #btnNewBook 
+    #btnNewAutor 
 	{
         position:absolute;
         left: 20%;
@@ -68,8 +52,8 @@
 </style>
 
 </head>
-	<h2 align="center">BIBLIOTECA</h2>
-	<p align="center">Biblioteca Mini</p>
+	<h2 align="center">BIBLIOTECA Mini</h2>
+	<p align="center">Gestion de Autores</p>
 		
 <div style="text-align: center">		
 		
@@ -77,16 +61,14 @@
 	<table>
 	
 		<tr>
-			<th>Title</th>
-			<th>ISBN</th>
-			<th>Paginas</th>
-			<th>Anyo</th>	
+			<th>id Autor</th>
+			<th>Nombre</th>
+			<th>Apellido</th>	
 		</tr>
-		<tr th:each="book:${listalibros}">
-			<td th:text="${book.title}"></td>
-			<td th:text="${book.ISBN}"></td>
-			<td th:text="${book.pages}"></td>
-			<td th:text="${book.year}"></td>
+		<tr th:each="autor:${listaAutores}">
+			<td th:text="${autor.idAutor}"></td>
+			<td th:text="${autor.nombre}"></td>
+			<td th:text="${autor.apellido1}"></td>
 		</tr>
 	</table>
 
@@ -99,8 +81,8 @@
 			<input id="btnHome" class=boton type="submit" value="Home"/>
 		</form>
 	
-		<form action="nuevoLibro">
-			<input id="btnNewBook" class=boton type="submit" value="Nuevo Libro"/>
+		<form action="nuevoAutor">
+			<input id="btnNewAutor" class=boton type="submit" value="Nuevo Autor"/>
 		</form>
 	
 	</table>
