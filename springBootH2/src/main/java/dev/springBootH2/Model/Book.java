@@ -18,11 +18,12 @@ public class Book
     @Id	
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDBOOK")
-	private Long idBook;    
+	private Integer idBook;    
     private String title;
 	private String ISBN;
 	private int pages;
 	private int year;
+	private String estado;
 
 	@OneToOne(mappedBy ="libro", cascade= CascadeType.ALL)
 	private Autor autor;
@@ -32,13 +33,15 @@ public class Book
 	
 	
 	
-	public Book(String title, String ISBN, int pages, int year) 
+
+	public Book(String title, String ISBN, int pages, int year, String estado) 
 	{
 		super();
 		this.title = title;
 		this.ISBN = ISBN;
 		this.pages = pages;
 		this.year = year;
+		this.estado = estado;
 	}
 
 	public Book(String title) 
@@ -58,11 +61,11 @@ public class Book
 	
 	
 	
-	public Long getIdBook() {
+	public Integer getIdBook() {
 		return idBook;
 	}
 
-	public void setIdBook(Long idBook) {
+	public void setIdBook(Integer idBook) {
 		this.idBook = idBook;
 	}
 
@@ -101,6 +104,13 @@ public class Book
 		this.year = year;
 	}
 	
-	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}	
 	
 }

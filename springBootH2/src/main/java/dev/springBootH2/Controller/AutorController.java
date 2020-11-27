@@ -13,7 +13,7 @@ import dev.springBootH2.Service.AutorService;
 @RequestMapping("/GestionAutores")
 public class AutorController 
 {
-
+	
 	@Autowired
 	AutorService service;
 	
@@ -34,10 +34,7 @@ public class AutorController
 	@RequestMapping("/insertarAutor")
 	public String addAutor(Autor autor, Model model)
 	{
-		System.out.println("autor " + autor.getNombre());
 		service.insertAutor(autor);
-		
-		System.out.println("autor " + autor.getId_Autor());
 		
 		model.addAttribute("listaAutores", service.findAll());
 		return "autores/listadoAutores.html";

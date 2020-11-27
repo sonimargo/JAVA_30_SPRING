@@ -40,23 +40,34 @@
 	<p align="center">Alta nuevo Libro</p>
 			
 <body>
-	<form action="insertarLibro">
-		<div class="form-group">
-			<label for="txttitle">Titulo:</label> 
-			<input type="text" name="title" class="form-control" id="txttitle" />
-
+	<form action="modificaLibro" th:object="${libroModify}">
 			<div class="form-group">
-				<label for="txtISBN">ISBN:</label>
-				<input type="text" name="ISBN" class="form-control" id="txtISBN" />
+				<label for="txttitle">Titulo:</label>			
+				<input type="text" name=title class="form-control" id="txttitle"
+					th:field="*{title}" />
 			</div>
 			<div class="form-group">
+				<label for="txtISBN">ISBN:</label>
+				<input type="text" name="ISBN" class="form-control" id="txtISBN" 
+					th:field="*{isbn}" />
+			</div>
+			
+			<div class="form-group">
 				<label for="txtpages">Paginas:</label>
-				<input type="text" name="pages" class="form-control" id="txtpages" />
+				<input type="text" name="pages" class="form-control" id="txtpages" 
+					th:field="*{pages}" />
 			</div>
 
 			<div class="form-group">
 				<label for="txtyear">Any:</label>
-				<input type="text" name="year" class="form-control" id="txtyear" />
+				<input type="text" name="year" class="form-control" id="txtyear" 
+					th:field="*{year}" />
+			</div>
+
+			<div class="form-group">
+				<label for="txtstats">Estado:</label>
+				<input type="text" name="estado" class="form-control" id="txtstatus" 
+					th:field="*{estado}" />
 			</div>
 			
 			<div th:object="${autor}">
@@ -71,10 +82,14 @@
 			</div>
 			
 			<div>
-				<input id="btnAltaLibro" class=boton type="submit" value="ALTA LIBRO"/>
+				<input id="btnMoficarLibro" class=boton type="submit" value="MODIFICAR LIBRO"/>
 			</div>
-		</div>
-
+			
+			
+			<form>
+				<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+			</form>
+		
 	</form>
 </body>
 </html>

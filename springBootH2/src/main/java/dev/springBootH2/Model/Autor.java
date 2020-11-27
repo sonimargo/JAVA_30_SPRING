@@ -16,7 +16,7 @@ public class Autor
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDAUTOR")
-	private Long idAutor;
+	private Integer idAutor;
 	private String nombre;
 	private String apellido1;
 	
@@ -41,11 +41,11 @@ public class Autor
 	
 	
 	
-	public Long getId_Autor() {
+	public Integer getIdAutor() {
 		return idAutor;
 	}
 
-	public void setId_Autor(Long id_Autor) {
+	public void setIdAutor(Integer id_Autor) {
 		this.idAutor = id_Autor;
 	}
 

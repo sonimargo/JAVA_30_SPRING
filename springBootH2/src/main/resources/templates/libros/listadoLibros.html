@@ -19,7 +19,7 @@
 		padding:10px;
 		border: 1px solid #1C6EA4;
 	  	background-color: #EEEEEE;
-	  	width: 60%;
+	  	width: 80%;
 	  	text-align: left;
 	  	border-collapse: collapse;
 	}
@@ -32,6 +32,7 @@
         color:white;
         font:bold 10px/10px verdana;
         width:100px;
+        height: 30px;
         cursor:pointer;
         cursor:hand;
         text-align:center;
@@ -67,6 +68,7 @@
 			<th>Paginas</th>
 			<th>Anyo</th>	
 			<th>Autor</th>
+			<th>Estado</th>
 			<th>Accion</th>
 		</tr>
 		<tr th:each="book:${listalibros}">
@@ -75,8 +77,11 @@
 			<td th:text="${book.ISBN}"></td>
 			<td th:text="${book.pages}"></td>
 			<td th:text="${book.year}"></td>
-			<td th:text="${book.autor.nombre}"></td>
-			<td><a th:href="@{/GestionLibros/archivarLibro(itemId=${itemAmount.product.id})}">Archivar libro</a></td>			
+			<td th:text="pendent"></td>
+			<td th:text="${book.estado}"></td>
+			<!--   <td th:text="${book.autor.nombre}"></td> -->
+			<td><a th:href="@{/GestionLibros/bajaLibro(libroId=${book.idBook})}">Dar baja el libro</a></td>			
+			<td><a th:href="@{/GestionLibros/modificaLibro(libroId=${book.idBook})}">Modificar libro</a></td>
 		</tr>
 	</table>
 
@@ -85,10 +90,17 @@
 
 	
 	<table>
+	
+		<form>
+			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+		</form>
+		
+		<!--  
 		<form action="home">
 			<input id="btnHome" class=boton type="submit" value="Home"/>
 		</form>
-	
+		-->
+		
 		<form action="nuevoLibro">
 			<input id="btnNewBook" class=boton type="submit" value="Nuevo Libro"/>
 		</form>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import dev.springBootH2.Model.Book;
 import dev.springBootH2.Service.AutorService;
 import dev.springBootH2.Service.BookService;
+import dev.springBootH2.Utilitats.EstadoLibro;
 
 @Controller
 @RequestMapping("/GestionLibros")
@@ -31,8 +32,10 @@ public class BookController {
 	}
 	
 	@RequestMapping("/verListaLibros")
-	public String showBooks(Model model) 
+	public String showBooks(Model model, HttpSession sesion) 
 	{
+		sesion.setAttribute("listadoLibros", service.findAll());		
+			
 		model.addAttribute("listalibros", service.findAll());
 		return "libros/listadoLibros.html";
 	}
@@ -51,37 +54,60 @@ public class BookController {
 	@RequestMapping("/insertarLibro")
 	public String insertBook(Book libro, Model model) 
 	{
+		//libro.setEstado(EstadoLibro.DISPONIBLE);
 		service.insertBook(libro);
 		model.addAttribute("listalibros", service.findAll());
 		
 		return "libros/listadoLibros.html";
 	}
 	
-	@RequestMapping("/eliminaLibro")
-	public String removeBook(Model model, @RequestParam("libroId") Long idLibro, HttpSession session) 
+	@RequestMapping(value = "/bajaLibro")
+	public String removeBook(Model model, @RequestParam("libroId") Integer idLibro, HttpSession session) 
 	{ 	
-		List<Book> listaLibros = (List<Book>) session.getAttribute("listaLibros");
+		List<Book> listaLibros = (List<Book>) session.getAttribute("listadoLibros");
+		
 		int index = this.exists(idLibro, listaLibros);
 		
-		Book libro = listaLibros.get(index);		
-		service.deleteBook(libro); 
+		if (index != -1)
+		{
+			Book libro = listaLibros.get(index);		
+			service.deleteBook(libro);		
+		}
 		
 		model.addAttribute("listalibros", service.findAll());
 		
-		return "libros/webEliminarLibro.html";
+		return "libros/listadoLibros.html";
+	}
+	
+	@RequestMapping(value = "/modificaLibro")
+	public String modifyBook(Model model, @RequestParam("libroId") Integer idLibro, HttpSession session) 
+	{ 	
+		List<Book> listaLibros = (List<Book>) session.getAttribute("listadoLibros");
+		
+		int index = this.exists(idLibro, listaLibros);
+		
+		if (index != -1)
+		{
+			Book libro = listaLibros.get(index);
+			
+			model.addAttribute("libroModify", listaLibros.get(index)); 
+					
+			model.addAttribute("comboAutores", serviceAutor.findAll());
+			return "libros/webModificarLibro.html";
+		}
+		return "libros/listadoLibros.html";
+		
 	}
 	
 	
-	
-	
 	// metodos propios del controler
-	private int exists(Long existeIdBook, List<Book> listaLibros) 
+	private int exists(Integer idBookExiste, List<Book> listaLibros) 
 	{
 		for (int i = 0; i < listaLibros.size(); i++) 
 		{
-			if (listaLibros.get(i).getIdBook() == existeIdBook) 
+			if (listaLibros.get(i).getIdBook() == idBookExiste) 
 			{
-				return i;
+				return i;				
 			}
 		}
 		return -1;
