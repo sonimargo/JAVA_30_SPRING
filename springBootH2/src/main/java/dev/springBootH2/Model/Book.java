@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import dev.springBootH2.Utilitats.EstadoLibro;
+
 @Entity
 @Table(name="BOOKS")
 public class Book 
@@ -23,7 +25,7 @@ public class Book
 	private String ISBN;
 	private int pages;
 	private int year;
-	private String estado;
+	private EstadoLibro estado;
 
 	@OneToOne(mappedBy ="libro", cascade= CascadeType.ALL)
 	private Autor autor;
@@ -34,7 +36,7 @@ public class Book
 	
 	
 
-	public Book(String title, String ISBN, int pages, int year, String estado) 
+	public Book(String title, String ISBN, int pages, int year, EstadoLibro estado) 
 	{
 		super();
 		this.title = title;
@@ -57,6 +59,14 @@ public class Book
 	
 	
 	
+	
+	
+	//ESTABLECER el autor para este libro
+	 public void addAutor (Autor autor) 
+	 {
+		 this.autor = autor;
+		 autor.setLibro(this);		 
+	 } 
 	
 	
 	
@@ -105,12 +115,18 @@ public class Book
 	}
 	
 
-	public String getEstado() {
+	public EstadoLibro getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(EstadoLibro estado) {
 		this.estado = estado;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [idBook=" + idBook + ", title=" + title + ", ISBN=" + ISBN + ", pages=" + pages + ", year=" + year
+				+ ", estado=" + estado + ", autor=" + autor + "]";
 	}	
 	
 }

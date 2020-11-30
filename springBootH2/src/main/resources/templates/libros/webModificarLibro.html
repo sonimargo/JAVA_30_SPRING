@@ -41,6 +41,9 @@
 			
 <body>
 	<form action="modificaLibro" th:object="${libroModify}">
+			
+			<input type="hidden" th:field="*{idBook}" />
+	
 			<div class="form-group">
 				<label for="txttitle">Titulo:</label>			
 				<input type="text" name=title class="form-control" id="txttitle"
@@ -49,9 +52,9 @@
 			<div class="form-group">
 				<label for="txtISBN">ISBN:</label>
 				<input type="text" name="ISBN" class="form-control" id="txtISBN" 
-					th:field="*{isbn}" />
+					th:field="*{ISBN}" />
 			</div>
-			
+	
 			<div class="form-group">
 				<label for="txtpages">Paginas:</label>
 				<input type="text" name="pages" class="form-control" id="txtpages" 
@@ -72,24 +75,25 @@
 			
 			<div th:object="${autor}">
 				<label>Seleccionar autor</label>
-				<select id="seleccionAutor" name="libroId">
+				<select id="seleccionAutor" name="autorId">
 					<option th:value="0">No customer</option>
 					<option th:each="autor : ${comboAutores}" 
-					        th:value="${autor.idAutor}"
-					  		th:text="${autor.idAutor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
+					        	th:value="${autor.idAutor}"
+					  			th:text="${autor.idAutor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
 					</option>
 				</select>	
 			</div>
-			
-			<div>
-				<input id="btnMoficarLibro" class=boton type="submit" value="MODIFICAR LIBRO"/>
-			</div>
-			
-			
-			<form>
-				<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
-			</form>
 		
+			
 	</form>
+	<form>
+	
+			<a th:href="@{/GestionLibros/salvaLibro(libro=${libroModify})}">MODIFICAR LIBRO</a>
+	</form>		
+		<form>
+			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+		</form>
+		
+	
 </body>
 </html>

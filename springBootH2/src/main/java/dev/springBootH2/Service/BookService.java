@@ -2,6 +2,8 @@ package dev.springBootH2.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,15 @@ public class BookService
 		repository.delete(book);
 	}
 	
+	public void saveBook(Book book) 
+	{
+		repository.save(book);
+	}
+	
+	public Optional<Book> findById (long id) 
+	{
+		return repository.findById(id);
+	}
 
+	
 }

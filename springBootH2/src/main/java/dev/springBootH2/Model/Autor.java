@@ -1,13 +1,19 @@
 package dev.springBootH2.Model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name="AUTORES")
@@ -25,6 +31,15 @@ public class Autor
 	@JoinColumn (name = "FK_BOOK_ID", nullable = true, insertable = false, updatable = false)
     private Book libro;
 	
+	
+	@OneToMany(mappedBy = "autorCita", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	//@JsonIgnore
+	private List<Cita> ListaDeCitas;
+	
+	
+	
+	
+	
 	public Autor() 
 	{
 		super();
@@ -37,6 +52,8 @@ public class Autor
 		this.apellido1 = apellido1;
 	}
 
+
+	
 	
 	
 	
@@ -73,6 +90,23 @@ public class Autor
 		this.libro = libro;
 	}
 
+	public List<Cita> getListaDeCitas() 
+	{
+		return ListaDeCitas;
+	}
+
+	public void setListaDeCitas(List<Cita> listaDeCitas) 
+	{
+		ListaDeCitas = listaDeCitas;
+	}
+
+	//OBSOLETO: Añadir la cita a la lista y ESTABLECER el autor para esta cita
+	//Se establece con setListaDeCitas
+	//
+	/*
+	 * public void addCitas (Cita cita) { ListaDeCitas.add(cita);
+	 * cita.setAutor(this); }
+	 */
 	
 	
 	
