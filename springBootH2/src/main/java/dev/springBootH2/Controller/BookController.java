@@ -1,6 +1,7 @@
 package dev.springBootH2.Controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
@@ -76,7 +77,7 @@ public class BookController {
 			Book libro = listaLibros.get(index);
 			libro.setEstado(EstadoLibro.BAJA);
 			//service.deleteBook(libro);
-			service.saveBook(libro);
+			service.updateBook(libro);
 		}
 		
 		model.addAttribute("listalibros", service.findAll());
@@ -87,6 +88,7 @@ public class BookController {
 	@RequestMapping(value = "/modificaLibro")
 	public String modifyBook(Model model, @RequestParam("libroId") Integer idLibro, HttpSession sesion) 
 	{ 	
+		System.out.println("********************************************************************" + idLibro);
 		List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
 		
 		int index = this.exists(idLibro, listaLibros);
@@ -95,9 +97,12 @@ public class BookController {
 		{
 			Book libro = listaLibros.get(index);
 			
+			System.out.println("********************************************************************" + libro.toString());
 			model.addAttribute("libroModify", listaLibros.get(index)); 
-					
+			
+			System.out.println("******************************************************************** despues model libro" );
 			model.addAttribute("comboAutores", serviceAutor.findAll());
+			System.out.println("******************************************************************** despues model combo autores" );
 			return "libros/webModificarLibro.html";
 		} 
 		else
@@ -111,29 +116,49 @@ public class BookController {
 	}
 
 	
-	@RequestMapping(value = "/salvaLibro")
-	public String saveBook( @RequestParam("libro") Book libroAmodificar, Model model, HttpSession sesion) 
+	@RequestMapping(value = "/updateLibro")
+	public String updateBook(Book libroAmodificar, Model model, HttpSession sesion) 
 	{ 
 		System.out.println("********************************************************************");
 		System.out.println("********************************************************************" + libroAmodificar.toString());
+
+		
+		
+		Optional<Book> bookOptional = service.findById(libroAmodificar.getIdBook());
+		
+		if (bookOptional.isPresent());
+		{
+			service.updateBook(libroAmodificar);
+		}
+		
+		sesion.setAttribute("listadoLibros", service.findAll());
+		
+		model.addAttribute("listalibros", service.findAll());
+		
+		return "libros/listadoLibros.html";
+		
 		
 		//System.out.println("******************************************************************* libro id " + libro.idBook);
 		
-		List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
+		//List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
+		
+		
+		
+		//repository.findById(title);
 		
 		//int index = this.exists(idLibro, listaLibros);
 		
 	//	if (index != -1) // Exite 
 	//	{
 		//	System.out.println("******************************************************************* libro inex " + index);
-			service.saveBook(libroAmodificar);
+		//	service.saveBook(libroAmodificar);
 	//	}
 		
-		sesion.setAttribute("listadoLibros", service.findAll());		
+		//sesion.setAttribute("listadoLibros", service.findAll());		
 		
-		model.addAttribute("listalibros", service.findAll());
+		//model.addAttribute("listalibros", service.findAll());//
 		
-		return "libros/listadoLibros.html";
+		
 	}
 	
 	

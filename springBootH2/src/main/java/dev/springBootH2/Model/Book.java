@@ -58,18 +58,7 @@ public class Book
 	}
 	
 	
-	
-	
-	
-	//ESTABLECER el autor para este libro
-	 public void addAutor (Autor autor) 
-	 {
-		 this.autor = autor;
-		 autor.setLibro(this);		 
-	 } 
-	
-	
-	
+
 	
 	public Integer getIdBook() {
 		return idBook;

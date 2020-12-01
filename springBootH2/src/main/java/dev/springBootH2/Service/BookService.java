@@ -32,7 +32,7 @@ public class BookService
 		repository.delete(book);
 	}
 	
-	public void saveBook(Book book) 
+	public void updateBook(Book book) 
 	{
 		repository.save(book);
 	}
