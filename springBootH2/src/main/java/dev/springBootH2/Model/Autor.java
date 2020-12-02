@@ -22,19 +22,19 @@ public class Autor
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDAUTOR")
-	private Integer idAutor;
+	private Long idAutor;
 	private String nombre;
 	private String apellido1;
 	
 
-	@OneToOne
-	@JoinColumn (name = "FK_BOOK_ID", nullable = true, insertable = false, updatable = false)
-    private Book libro;
+	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Book> listaDelibros;
 	
 	
-	@OneToMany(mappedBy = "autorCita", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	//@JsonIgnore
-	private List<Cita> ListaDeCitas;
+	/*
+	 * @OneToMany(mappedBy = "autorCita", fetch = FetchType.LAZY, cascade =
+	 * CascadeType.ALL) //@JsonIgnore private List<Cita> ListaDeCitas;
+	 */
 	
 	
 	
@@ -58,11 +58,11 @@ public class Autor
 	
 	
 	
-	public Integer getIdAutor() {
+	public Long getIdAutor() {
 		return idAutor;
 	}
 
-	public void setIdAutor(Integer id_Autor) {
+	public void setIdAutor(Long id_Autor) {
 		this.idAutor = id_Autor;
 	}
 
@@ -82,23 +82,18 @@ public class Autor
 		this.apellido1 = apellido1;
 	}
 
-	public Book getLibro() {
-		return libro;
+	public List<Book> getListaDelibros() {
+		return listaDelibros;
 	}
 
-	public void setLibro(Book libro) {
-		this.libro = libro;
+	public void setListaDelibros(List<Book> listaDelibros) {
+		this.listaDelibros = listaDelibros;
 	}
 
-	public List<Cita> getListaDeCitas() 
-	{
-		return ListaDeCitas;
-	}
-
-	public void setListaDeCitas(List<Cita> listaDeCitas) 
-	{
-		ListaDeCitas = listaDeCitas;
-	}
+	
+	
+	
+	
 
 	//OBSOLETO: Añadir la cita a la lista y ESTABLECER el autor para esta cita
 	//Se establece con setListaDeCitas

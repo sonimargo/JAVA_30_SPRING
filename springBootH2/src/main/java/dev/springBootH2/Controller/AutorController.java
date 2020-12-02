@@ -1,5 +1,6 @@
 package dev.springBootH2.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,13 @@ public class AutorController
 	{
 		//Buscar el objeto padre
 		Optional<Book> bookBuscado = serviceBook.findById(id);
+		List<Book> listadoDeLibros = (List<Book>) serviceBook.findAll();
 		
 		//Si todo es corecto, establecer el autor para este libro
-		if (bookBuscado.isPresent())  autor.setLibro(bookBuscado.get());
-		else autor.setLibro(null);
-		
+		if (bookBuscado.isPresent())  
+			autor.setListaDelibros(listadoDeLibros);
+		else 
+			autor.setListaDelibros(null);		
 		
 		serviceAutor.insertAutor(autor);
 		

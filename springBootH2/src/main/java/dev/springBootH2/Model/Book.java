@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -20,19 +22,16 @@ public class Book
     @Id	
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDBOOK")
-	private Integer idBook;    
+	private Long idBook;    
     private String title;
 	private String ISBN;
 	private int pages;
 	private int year;
 	private EstadoLibro estado;
 
-	@OneToOne(mappedBy ="libro", cascade= CascadeType.ALL)
+	@ManyToOne
+	@JoinColumn(name="FK_AUTOR_ID", nullable=true)
 	private Autor autor;
-	
-	
-	
-	
 	
 	
 
@@ -60,11 +59,11 @@ public class Book
 	
 
 	
-	public Integer getIdBook() {
+	public Long getIdBook() {
 		return idBook;
 	}
 
-	public void setIdBook(Integer idBook) {
+	public void setIdBook(Long idBook) {
 		this.idBook = idBook;
 	}
 

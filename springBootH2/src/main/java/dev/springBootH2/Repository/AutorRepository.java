@@ -1,5 +1,7 @@
 package dev.springBootH2.Repository;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 
 import dev.springBootH2.Model.Autor;
@@ -8,6 +10,6 @@ import dev.springBootH2.Model.Autor;
 public interface AutorRepository extends CrudRepository<Autor, Long> 
 { 
 
-	Autor findById(long id);
+	Optional<Autor> findById(long id);
 
 }

@@ -35,63 +35,101 @@
 	<h2 align="center">BIBLIOTECA MINI</h2>
 	<p align="center">Alta nuevo Libro</p>
 
-<!--  th:value="*{libroModify.title}"  -->			
-<body>
-	<form action="updateLibro" th:object="${libroModify}"> 
+<!--   > 
+		th:value="*{libroModify.title}"  
 		
-		<label for="txt_id">Identificador</label>	
+	<form 	th:action="@{/animales/preModAnimal}" 
+		th:object="${animal}" 
+		method="post" 
+		enctype="multipart/form-data" 
+		id="formPreModAnimal">	
+	
+		<label>Animal</label>
+        <input type="radio" th:field="*{tipo}" th:value="*{tipo.PERRO}" required />
+
+        <label for="selectAnimal">Animal</label>
+			<select th:fragment="animales" 
+					id="selectAnimal" required
+            		class="form-control">
+                    <option value="" 
+                    		selected="selected">Selecciona animal</option>
+                    <option th:each="i : ${animales}"
+                                th:text="${i.emojiTipo} + ' ' + ${i.emojiSexo} + ' - ' + ${i.nombre} + ' - ' + ${i.raza} + ' - ' + ${i.provincia.provincia} + '  (' + ${i.poblacion} + ')'"
+                                th:value="${i.id}"></option>
+             </select>
+	</form> 		
+	https://stackoverflow.com/questions/58913514/how-to-get-selected-values-to-input-values-as-objects-in-spring-thymeleaf
+		-->
+					
+<body>
+	<form th:action="@{/GestionLibros/updateLibro}" 
+			th:object="${libroParaModifcar}">	  
+		
+		<label >Identificador</label>	
 		<input readonly name= "idBook"
-				type="number" 
-				th:value="${libroModify.idBook}" />
+				type="number"
+				th:field="*{idBook}"
+				th:value="*{idBook}" />
 	
 		<label for="txt_title">Titulo:</label>			
 		<input id="txt_title" 
 			   name=title
 			   type="text" 			    
-			   class="form-control"			  
-			   th:value="${libroModify.title}"  /> 
+			   class="form-control"
+			   th:field="*{title}" 
+			   th:value="*{title}"  
+			   />
+			
 		
 		<label for="txt_ISBN">ISBN:</label>
 		<input id="txt_ISBN"
 				name="ISBN" 
 				type="text" 
 				class="form-control"  
-				th:value="${libroModify.ISBN}" 	/>
+				th:field="*{ISBN}"
+				th:value="*{ISBN}" 	/>
 		
 		<label for="txt_pages">Paginas:</label>
 		<input  id="txt_pages"
 				name="pages" 
 				type="number"  
 				class="form-control"  
-				th:value="${libroModify.pages}" />
+				th:field="*{pages}"
+				th:value="*{pages}" />
 		
 		<label for="txt_year">Any:</label>
 		<input id="txt_year" 
 				name="year"
 				type="number"  
 				class="form-control"  
-				th:value="${libroModify.year}"	/>
+				th:field="*{year}"
+				th:value="*{year}"	/>
 
 		<label for="txt_stats">Estado:</label>
 		<input id="txt_status"
 				name="estado" 
 				type="text"  
 				class="form-control"  
-				th:value="${libroModify.estado}"	/>
+				th:field="*{estado}"
+				th:value="*{estado}"	/>
 
+			<label>Autor</label>
+			<select id="autorId" 
+					name="autorId">
+				
+				
+				<option value="" 
+                		selected="selected">Selecciona autor</option>
+				
+				
+				<option th:each="autorFor : ${listaAutores}" 
+						th:value="${autorFor.idAutor}"
+						th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' : '+${autorFor.apellido1}">
+				</option>
+			</select>	
 
-		<label>Seleccionar autor</label>
-		<select id="combo_Autores" 
-				name="comboAutores"
-				th:value="${libroModify.autor}">
-			<option th:value="0">No customer</option>
-			<option th:each="autor : ${comboAutores}" 
-					th:value="${autor.idAutor}"
-					th:text="${autor.idAutor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
-			</option>
-		</select>	
 		
-		<button name= "btn_modificar" >Modificar Libro</button>
+		<button type="submit" name= "btn_modificar" >Modificar Libro</button>
 	</form>
 	
 	<!--  

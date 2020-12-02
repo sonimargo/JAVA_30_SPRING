@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import dev.springBootH2.Model.Autor;
 import dev.springBootH2.Model.Book;
 import dev.springBootH2.Service.AutorService;
 import dev.springBootH2.Service.BookService;
@@ -21,7 +22,7 @@ import dev.springBootH2.Utilitats.EstadoLibro;
 public class BookController {
 
 	@Autowired
-	BookService service;
+	BookService serviceBook;
 	
 	@Autowired
 	AutorService serviceAutor;
@@ -35,9 +36,9 @@ public class BookController {
 	@RequestMapping("/verListaLibros")
 	public String showBooks(Model model, HttpSession sesion) 
 	{
-		sesion.setAttribute("listadoLibros", service.findAll());		
+		sesion.setAttribute("listadoLibros", serviceBook.findAll());		
 			
-		model.addAttribute("listalibros", service.findAll());
+		model.addAttribute("listalibros", serviceBook.findAll());
 		return "libros/listadoLibros.html";
 	}
 
@@ -56,17 +57,17 @@ public class BookController {
 	public String insertBook(Book libro, Model model, HttpSession sesion) 
 	{
 		libro.setEstado(EstadoLibro.DISPONIBLE);
-		service.insertBook(libro);		
+		serviceBook.insertBook(libro);		
 		
-		sesion.setAttribute("listadoLibros", service.findAll());		
+		sesion.setAttribute("listadoLibros", serviceBook.findAll());		
 		
-		model.addAttribute("listalibros", service.findAll());
+		model.addAttribute("listalibros", serviceBook.findAll());
 		
 		return "libros/listadoLibros.html";
 	}
 	
 	@RequestMapping(value = "/bajaLibro")
-	public String removeBook(Model model, @RequestParam("libroId") Integer idLibro, HttpSession sesion) 
+	public String removeBook(Model model, @RequestParam("libroId") Long idLibro, HttpSession sesion) 
 	{ 	
 		List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
 		
@@ -77,63 +78,64 @@ public class BookController {
 			Book libro = listaLibros.get(index);
 			libro.setEstado(EstadoLibro.BAJA);
 			//service.deleteBook(libro);
-			service.updateBook(libro);
+			serviceBook.updateBook(libro);
 		}
 		
-		model.addAttribute("listalibros", service.findAll());
+		model.addAttribute("listalibros", serviceBook.findAll());
 		
 		return "libros/listadoLibros.html";
 	}
 	
+	//Metodo que nos llevará a la web de modificar, con los datos del libro
 	@RequestMapping(value = "/modificaLibro")
-	public String modifyBook(Model model, @RequestParam("libroId") Integer idLibro, HttpSession sesion) 
-	{ 	
-		System.out.println("********************************************************************" + idLibro);
-		List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
+	public String modifyBook(@RequestParam("libroId") Long idLibro, Model model, HttpSession sesion) 
+	{ 			
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("*********************************************************************"+idLibro);
 		
-		int index = this.exists(idLibro, listaLibros);
+		Optional<Book> libroOptional = serviceBook.findById(idLibro);
 		
-		if (index != -1)
+		if (libroOptional.isPresent())
 		{
-			Book libro = listaLibros.get(index);
+			System.out.println("********************************************************optional ***"+ (libroOptional.get().toString() ));
 			
-			System.out.println("********************************************************************" + libro.toString());
-			model.addAttribute("libroModify", listaLibros.get(index)); 
+			model.addAttribute("libroParaModifcar", libroOptional.get()); 
 			
-			System.out.println("******************************************************************** despues model libro" );
-			model.addAttribute("comboAutores", serviceAutor.findAll());
-			System.out.println("******************************************************************** despues model combo autores" );
+			System.out.println("********************************************************model ******"+ (serviceBook.findById(idLibro)).get().toString());
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
+			model.addAttribute("listaAutores", serviceAutor.findAll());
 			return "libros/webModificarLibro.html";
-		} 
+		}
 		else
 		{
-			//Si el id de libro no existe, retorno a la lista de libros 
-			sesion.setAttribute("listadoLibros", service.findAll());		
-			
-			model.addAttribute("listalibros", service.findAll());
-			return "libros/listadoLibros.html";	
+			model.addAttribute("listalibros", serviceBook.findAll());			
+			return "libros/listadoLibros.html";			
 		}
+
+		
 	}
 
 	
 	@RequestMapping(value = "/updateLibro")
-	public String updateBook(Book libroAmodificar, Model model, HttpSession sesion) 
+	public String updateBook(Book libroAmodificar, Model model, HttpSession sesion, @RequestParam("autorId") Long idAutor) 
 	{ 
-		System.out.println("********************************************************************");
-		System.out.println("********************************************************************" + libroAmodificar.toString());
-
+		Optional<Autor> autorOptional = serviceAutor.findById(idAutor);
 		
+		//Optional<Book> bookOptional = serviceBook.findById(libroAmodificar.getIdBook());
 		
-		Optional<Book> bookOptional = service.findById(libroAmodificar.getIdBook());
-		
-		if (bookOptional.isPresent());
-		{
-			service.updateBook(libroAmodificar);
-		}
-		
-		sesion.setAttribute("listadoLibros", service.findAll());
-		
-		model.addAttribute("listalibros", service.findAll());
+		if (autorOptional.isPresent())
+			libroAmodificar.setAutor(autorOptional.get());
+		else
+			libroAmodificar.setAutor(null);
+					
+		serviceBook.updateBook(libroAmodificar);
+				
+		model.addAttribute("listalibros", serviceBook.findAll());
 		
 		return "libros/listadoLibros.html";
 		
@@ -163,7 +165,7 @@ public class BookController {
 	
 	
 	// metodos propios del controler
-	private int exists(Integer idBookExiste, List<Book> listaLibros) 
+	private int exists(Long idBookExiste, List<Book> listaLibros) 
 	{
 		for (int i = 0; i < listaLibros.size(); i++) 
 		{

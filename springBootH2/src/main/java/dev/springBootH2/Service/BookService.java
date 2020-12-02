@@ -1,7 +1,5 @@
 package dev.springBootH2.Service;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,31 +13,31 @@ import dev.springBootH2.Repository.BookRepository;
 public class BookService 
 {
 	@Autowired
-	BookRepository repository;
+	BookRepository repositorioBook;
 	
 	public Iterable<Book> findAll() 
 	{
-		return repository.findAll();
+		return repositorioBook.findAll();
 	}
 	
 	public void insertBook(Book book) 
 	{
-		repository.save(book);
+		repositorioBook.save(book);
 	}
 	
 	public void deleteBook(Book book) 
 	{
-		repository.delete(book);
+		repositorioBook.delete(book);
 	}
 	
 	public void updateBook(Book book) 
 	{
-		repository.save(book);
+		repositorioBook.save(book);
 	}
 	
 	public Optional<Book> findById (long id) 
 	{
-		return repository.findById(id);
+		return repositorioBook.findById(id);
 	}
 
 	
