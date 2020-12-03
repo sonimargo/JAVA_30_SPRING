@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+	form { 
+		margin:20px;
+		padding:10px;
+		border: 1px solid #1C6EA4;
+	    background-color: #EEEEEE;
+	  	width: 60%;
+	  	text-align: left;
+	  	border-collapse: collapse;
+	}
+	
+	.boton 
+	{
+        padding:10px 20px, 10px 20px; 
+        background: #1C6EA4;
+        color:white;
+        font:bold 10px/10px verdana;
+        width:100px;
+        height: 30px;
+        cursor:pointer;
+        cursor:hand;
+        text-align:center;
+    }
+    
+</style>
+
+
+</head>
+
+	<h2 align="center">BIBLIOTECA MINI</h2>
+	<p align="center">Alta nuevo Libro</p>
+
+<!--   > 
+		th:value="*{libroModify.title}"  
+		
+	<form 	th:action="@{/animales/preModAnimal}" 
+		th:object="${animal}" 
+		method="post" 
+		enctype="multipart/form-data" 
+		id="formPreModAnimal">	
+	
+		<label>Animal</label>
+        <input type="radio" th:field="*{tipo}" th:value="*{tipo.PERRO}" required />
+
+        <label for="selectAnimal">Animal</label>
+			<select th:fragment="animales" 
+					id="selectAnimal" required
+            		class="form-control">
+                    <option value="" 
+                    		selected="selected">Selecciona animal</option>
+                    <option th:each="i : ${animales}"
+                                th:text="${i.emojiTipo} + ' ' + ${i.emojiSexo} + ' - ' + ${i.nombre} + ' - ' + ${i.raza} + ' - ' + ${i.provincia.provincia} + '  (' + ${i.poblacion} + ')'"
+                                th:value="${i.id}"></option>
+             </select>
+	</form> 		
+	https://stackoverflow.com/questions/58913514/how-to-get-selected-values-to-input-values-as-objects-in-spring-thymeleaf
+		-->
+					
+<body>
+	<form th:action="@{/GestionLibros/updateLibro}" 
+			th:object="${libroParaModifcar}">	  
+		
+		<label >Identificador</label>	
+		<input readonly name= "idBook"
+				type="number"
+				th:field="*{idBook}"
+				th:value="*{idBook}" />
+	
+		<label for="txt_title">Titulo:</label>			
+		<input id="txt_title" 
+			   name=title
+			   type="text" 			    
+			   class="form-control"
+			   th:field="*{title}" 
+			   th:value="*{title}"  
+			   />
+			
+		
+		<label for="txt_ISBN">ISBN:</label>
+		<input id="txt_ISBN"
+				name="ISBN" 
+				type="text" 
+				class="form-control"  
+				th:field="*{ISBN}"
+				th:value="*{ISBN}" 	/>
+		
+		<label for="txt_pages">Paginas:</label>
+		<input  id="txt_pages"
+				name="pages" 
+				type="number"  
+				class="form-control"  
+				th:field="*{pages}"
+				th:value="*{pages}" />
+		
+		<label for="txt_year">Any:</label>
+		<input id="txt_year" 
+				name="year"
+				type="number"  
+				class="form-control"  
+				th:field="*{year}"
+				th:value="*{year}"	/>
+
+		<label for="txt_stats">Estado:</label>
+		<input id="txt_status"
+				name="estado" 
+				type="text"  
+				class="form-control"  
+				th:field="*{estado}"
+				th:value="*{estado}"	/>
+
+			<label>Autor</label>
+			<select id="autorId" 
+					name="autorId">
+				
+				
+				<option value="" 
+                		selected="selected">Selecciona autor</option>
+				
+				
+				<option th:each="autorFor : ${listaAutores}" 
+						th:value="${autorFor.idAutor}"
+						th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' : '+${autorFor.apellido1}">
+				</option>
+			</select>	
+
+		
+		<button type="submit" name= "btn_modificar" >Modificar Libro</button>
+	</form>
+	
+	<!--  
+	<form>	
+			<a th:href="@{/GestionLibros/updateLibro(libro=${libroModify})}"
+					class="btn btn-danger btn-sm">MODIFICAR LIBRO</a>
+	</form>
+	-->
+			
+	<form>
+			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+	</form>
+		
+	
+</body>
+</html>

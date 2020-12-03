@@ -22,11 +22,21 @@ public class Book
     @Id	
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "IDBOOK")
-	private Long idBook;    
+	private Long idBook;
+    
+    @Column(name = "TITLE")
     private String title;
+    
+    @Column(name = "ISBN")
 	private String ISBN;
+    
+    @Column(name = "PAGES")
 	private int pages;
+    
+    @Column(name = "YEAR")
 	private int year;
+    
+    @Column(name = "ESTADO")
 	private EstadoLibro estado;
 
 	@ManyToOne

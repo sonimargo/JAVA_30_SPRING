@@ -27,6 +27,7 @@ public class BookController {
 	@Autowired
 	AutorService serviceAutor;
 
+	
 	@RequestMapping("/inicio")
 	public String inicio(Model model) 
 	{
@@ -90,23 +91,26 @@ public class BookController {
 	@RequestMapping(value = "/modificaLibro")
 	public String modifyBook(@RequestParam("libroId") Long idLibro, Model model, HttpSession sesion) 
 	{ 			
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("*********************************************************************"+idLibro);
-		
 		Optional<Book> libroOptional = serviceBook.findById(idLibro);
 		
 		if (libroOptional.isPresent())
 		{
-			System.out.println("********************************************************optional ***"+ (libroOptional.get().toString() ));
+			model.addAttribute("libroParaModifcar", libroOptional.get()); 		
+			model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
 			
-			model.addAttribute("libroParaModifcar", libroOptional.get()); 
+			System.out.println("************************************************************* autorId ***********   "+ (libroOptional.get().getAutor().getIdAutor()));
 			
-			System.out.println("********************************************************model ******"+ (serviceBook.findById(idLibro)).get().toString());
-			System.out.println();
-			System.out.println();
-			System.out.println();
+			/* SIEMPRE PASA POR NULL
+			 * 
+			 * if ((libroOptional.get().getAutor().getIdAutor()) == null) {
+			 * model.addAttribute("autorId", 0); System.out.
+			 * println("************************************************************* autorid null ***********"
+			 * + (libroOptional.get().getAutor().getIdAutor())); } else {
+			 * model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
+			 * System.out.
+			 * println("************************************************************* autorid null ***********"
+			 * + (libroOptional.get().getAutor().getIdAutor())); }
+			 */
 			
 			model.addAttribute("listaAutores", serviceAutor.findAll());
 			return "libros/webModificarLibro.html";

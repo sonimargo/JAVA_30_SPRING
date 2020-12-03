@@ -3,6 +3,8 @@ package dev.springBootH2.Controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,17 +44,19 @@ public class AutorController
 	
 	
 	@RequestMapping("/insertarAutor")
-	public String addAutor(Autor autor, Model model, @RequestParam("idAutor") Long id)
+	public String addAutor(Autor autor, Model model, HttpSession sesion)
 	{
-		//Buscar el objeto padre
-		Optional<Book> bookBuscado = serviceBook.findById(id);
+		//Buscar la lista de libros que tiene el autor
+		//Optional<Book> bookBuscado = serviceBook.findById(id);
 		List<Book> listadoDeLibros = (List<Book>) serviceBook.findAll();
 		
-		//Si todo es corecto, establecer el autor para este libro
-		if (bookBuscado.isPresent())  
-			autor.setListaDelibros(listadoDeLibros);
-		else 
-			autor.setListaDelibros(null);		
+		//Si todo es corecto, establecer la lista de libros para este autor
+//		if (bookBuscado.isPresent())  
+	//		autor.setListaDelibros(listadoDeLibros);
+//		else 
+	
+		// En esta opción No se dan de alta los libros
+		autor.setListaDelibros(null);		
 		
 		serviceAutor.insertAutor(autor);
 		
@@ -60,3 +64,5 @@ public class AutorController
 		return "autores/listadoAutores.html";
 	}
 }
+
+

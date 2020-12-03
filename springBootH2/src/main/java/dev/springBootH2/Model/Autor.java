@@ -23,22 +23,24 @@ public class Autor
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDAUTOR")
 	private Long idAutor;
+	
+	@Column(name = "NOMBRE")
 	private String nombre;
+	
+	@Column(name = "APELLIDO1")
 	private String apellido1;
 	
 
-	@OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "autor", 
+				fetch = FetchType.LAZY, 
+				cascade = CascadeType.ALL)
     private List<Book> listaDelibros;
 	
-	
+	// HACER. lista de citas de autor: 1 autor N citas
 	/*
 	 * @OneToMany(mappedBy = "autorCita", fetch = FetchType.LAZY, cascade =
 	 * CascadeType.ALL) //@JsonIgnore private List<Cita> ListaDeCitas;
 	 */
-	
-	
-	
-	
 	
 	public Autor() 
 	{

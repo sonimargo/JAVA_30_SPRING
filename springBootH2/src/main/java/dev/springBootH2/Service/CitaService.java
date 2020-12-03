@@ -1,8 +1,11 @@
 package dev.springBootH2.Service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import dev.springBootH2.Model.Autor;
 import dev.springBootH2.Model.Cita;
 import dev.springBootH2.Repository.CitaRepository;
 
@@ -11,26 +14,32 @@ public class CitaService
 {
 
 	@Autowired
-	CitaRepository repository;
+	CitaRepository repositorioCita;
 
+	
 	public Iterable<Cita> findAll() 
 	{
-		return repository.findAll();
+		return repositorioCita.findAll();
 	}
 	
 	public void insertCita(Cita cita) 
 	{
-		repository.save(cita);
+		repositorioCita.save(cita);
 	}
 	
 	public void deleteCita(Cita cita) 
 	{
-		repository.delete(cita);
+		repositorioCita.delete(cita);
 	}
 	
 	public void saveCita(Cita cita) 
 	{
-		repository.save(cita);
+		repositorioCita.save(cita);
 	}
 	
+	
+	public Optional<Cita> findById (long id) 
+	{
+		return repositorioCita.findById(id);
+	}
 }

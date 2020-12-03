@@ -77,9 +77,8 @@
 			<td th:text="${book.ISBN}"></td>
 			<td th:text="${book.pages}"></td>
 			<td th:text="${book.year}"></td>
-			<td th:text="pendent"></td>
-			<td th:text="${book.estado}"></td>
-			<!--   <td th:text="${book.autor.nombre}"></td> -->
+			<td th:text="${book.autor.nombre} +' ' + ${book.autor.apellido1} "></td>
+			<td th:text="${book.estado}"></td>			
 			<td><a th:href="@{/GestionLibros/bajaLibro(libroId=${book.idBook})}">Dar baja el libro</a></td>			
 			<td><a th:href="@{/GestionLibros/modificaLibro(libroId=${book.idBook})}">Modificar libro</a></td>
 		</tr>

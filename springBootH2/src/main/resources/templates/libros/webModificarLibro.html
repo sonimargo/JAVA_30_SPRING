@@ -114,14 +114,10 @@
 				th:value="*{estado}"	/>
 
 			<label>Autor</label>
-			<select id="autorId" 
-					name="autorId">
-				
-				
-				<option value="" 
-                		selected="selected">Selecciona autor</option>
-				
-				
+			<select th:field="*{autor.IdAutor}"
+					id="autorId"
+					class="form-control">								
+				<option value="" >Selecciona autor</option>							
 				<option th:each="autorFor : ${listaAutores}" 
 						th:value="${autorFor.idAutor}"
 						th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' : '+${autorFor.apellido1}">

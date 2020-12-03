@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<style>
+	form { 
+		margin:20px;
+		padding:10px;
+		border: 1px solid #1C6EA4;
+	    background-color: #EEEEEE;
+	  	width: 60%;
+	  	text-align: left;
+	  	border-collapse: collapse;
+	}
+	
+	.boton 
+	{
+        padding:10px 20px, 10px 20px; 
+        background: #1C6EA4;
+        color:white;
+        font:bold 10px/10px verdana;
+        width:100px;
+        height: 30px;
+        cursor:pointer;
+        cursor:hand;
+        text-align:center;
+    }
+    
+</style>
+
+
+</head>
+
+	<h2 align="center">BIBLIOTECA MINI</h2>
+	<p align="center">Alta nuevo Libro</p>
+			
+<body>
+	<form action="insertarLibro">
+		<div class="form-group">
+			<label for="txttitle">Titulo:</label> 
+			<input type="text" name="title" class="form-control" id="txttitle" />
+
+			<div class="form-group">
+				<label for="txtISBN">ISBN:</label>
+				<input type="text" name="ISBN" class="form-control" id="txtISBN" />
+			</div>
+			<div class="form-group">
+				<label for="txtpages">Paginas:</label>
+				<input type="text" name="pages" class="form-control" id="txtpages" />
+			</div>
+
+			<div class="form-group">
+				<label for="txtyear">Any:</label>
+				<input type="text" name="year" class="form-control" id="txtyear" />
+			</div>
+			
+			<div th:object="${autor}">
+				<label>Seleccionar autor</label>
+				<select id="seleccionAutor" name="libroId">
+					<option th:value="0">No customer</option>
+					<option th:each="autor : ${comboAutores}" 
+					        th:value="${autor.idAutor}"
+					  		th:text="${autor.idAutor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
+					</option>
+				</select>	
+			</div>
+			
+			<div>
+				<input id="btnAltaLibro" class=boton type="submit" value="ALTA LIBRO"/>
+			</div>
+		</div>
+
+	</form>
+</body>
+</html>

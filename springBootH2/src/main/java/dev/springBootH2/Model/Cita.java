@@ -21,6 +21,8 @@ public class Cita
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDCITA")
 	private Integer idCita;
+	
+	@Column(name = "CITA")
 	private String cita;
 
 	@ManyToOne(fetch = FetchType.LAZY)

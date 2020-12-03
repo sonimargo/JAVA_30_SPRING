@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<link rel="stylesheet" href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+
+<!-- padding  arriba/dcha/abajo/izq #502121-->
+<style>
+	table , form , div
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 16pt;
+		border: 1px solid #1C6EA4;
+	  	background-color: #EEEEEE;
+	  	border-collapse: collapse;
+		margin:30px 30px 30px 30px;
+		
+	  	width: 80%;	  	
+	  	text-align: center;
+	}
+</style>
+
+</head>
+	<h2 align="center">BIBLIOTECA</h2>
+	<p align="center">Biblioteca Mini</p>
+
+<body>
+	<Br>
+	<p align="center" th:text="${serverTime}">Hora en servidor: </p>
+	<Br>
+	<p align="center" th:text="${mensaje}" style="color: blue"></p>
+	
+	<Br>
+	<Br>
+	<div>
+		<table>
+			<tr>
+				<td></td>
+				<td><br>
+					<a th:href="@{/biblioteca/libros}">Gestionar Reservas</a>
+				</td> 
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td><br>
+					<a th:href="@{/GestionLibros/verListaLibros}">Gestionar Libros</a>
+				</td> 
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td><br>
+					<a th:href="@{/GestionAutores/verListadoAutores}">Gestionar Autores</a>
+				</td> 
+			</tr>				
+			<tr>
+				<td></td>
+				<td><br>
+					<a th:href="@{/biblioteca/libros}">Gestionar Citas</a>
+				</td> 
+			</tr>				
+			<tr>
+				<td></td>
+				<td><br>
+					<a th:href="@{/biblioteca/libros}">Gestionar Usuarios</a>
+				</td> 
+			</tr>
+				
+
+				
+				
+			
+		</table>
+	</div>
+</body>
+	
+</html>
