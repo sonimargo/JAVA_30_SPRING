@@ -33,61 +33,38 @@
 </head>
 
 	<h2 align="center">BIBLIOTECA MINI</h2>
-	<p align="center">Modifcar Libro</p>
+	<p align="center">Modificar Autor</p>
+
 					
 <body>
-	<form th:action="@{/GestionLibros/updateLibro}" 
-			th:object="${libroParaModifcar}">	  
+	<form th:action="@{/GestionAutores/updateAutor}" 
+			th:object="${autorParaModifcar}">	  
 		
 		<label >Identificador</label>	
-		<input readonly name= "idBook"
+		<input readonly name= "idAutor"
 				type="number"
-				th:field="*{idBook}"
-				th:value="*{idBook}" />
+				th:field="*{idAutor}"
+				th:value="*{idAutor}" />
 	
-		<label for="txt_title">Titulo:</label>			
-		<input id="txt_title" 
-			   name=title
+		<label for="txt_nombre">Nombre:</label>			
+		<input id="txt_nombre" 
+			   name=nombre
 			   type="text" 			    
 			   class="form-control"
-			   th:field="*{title}" 
-			   th:value="*{title}"  
+			   th:field="*{nombre}" 
+			   th:value="*{nombre}"  
 			   />
 			
 		
-		<label for="txt_ISBN">ISBN:</label>
-		<input id="txt_ISBN"
-				name="ISBN" 
+		<label for="txt_ape1">Primer Apellido:</label>
+		<input id="txt_ape1"
+				name="apellido1" 
 				type="text" 
 				class="form-control"  
-				th:field="*{ISBN}"
-				th:value="*{ISBN}" 	/>
-		
-		<label for="txt_pages">Paginas:</label>
-		<input  id="txt_pages"
-				name="pages" 
-				type="number"  
-				class="form-control"  
-				th:field="*{pages}"
-				th:value="*{pages}" />
-		
-		<label for="txt_year">Any:</label>
-		<input id="txt_year" 
-				name="year"
-				type="number"  
-				class="form-control"  
-				th:field="*{year}"
-				th:value="*{year}"	/>
-
-		<label for="txt_stats">Estado:</label>
-		<input id="txt_status"
-				name="estado" 
-				type="text"  
-				class="form-control"  
-				th:field="*{estado}"
-				th:value="*{estado}"	/>
-
- 		<div>
+				th:field="*{apellido1}"
+				th:value="*{apellido1}" 	/>
+	
+<!--  		<div>
 			<label>Autor</label>
 			<select id="selectAutor"
 					name="autorId"				
@@ -100,9 +77,9 @@
 						>
 				</option>
 			</select>	
-		</div> 
-		
-		<button type="submit" name= "btn_modificar" >Modificar Libro</button>
+		</div>  -->
+			
+		<button type="submit" name= "btn_modificar" >Modificar Autor</button>
 	</form>
 	
 	<!--  

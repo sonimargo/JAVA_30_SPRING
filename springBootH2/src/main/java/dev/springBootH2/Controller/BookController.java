@@ -40,6 +40,9 @@ public class BookController {
 		sesion.setAttribute("listadoLibros", serviceBook.findAll());		
 			
 		model.addAttribute("listalibros", serviceBook.findAll());
+		
+		System.out.println("**************************************");
+		
 		return "libros/listadoLibros.html";
 	}
 
@@ -97,8 +100,6 @@ public class BookController {
 		{
 			model.addAttribute("libroParaModifcar", libroOptional.get()); 		
 			model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
-			
-			System.out.println("************************************************************* autorId ***********   "+ (libroOptional.get().getAutor().getIdAutor()));
 			
 			/* SIEMPRE PASA POR NULL
 			 * 

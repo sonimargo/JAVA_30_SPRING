@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.springBootH2.Model.Autor;
+import dev.springBootH2.Model.Book;
 import dev.springBootH2.Repository.AutorRepository;
 
 @Service
@@ -21,6 +22,10 @@ public class AutorService
 		return repositorioAutor.findAll();
 	}
 
+	public Optional<Autor> findById (long id) 
+	{
+		return repositorioAutor.findById(id);
+	}
 	
 	public void insertAutor(Autor autor) 
 	{
@@ -32,8 +37,10 @@ public class AutorService
 		repositorioAutor.delete(autor);
 	}
 	
-	public Optional<Autor> findById (long id) 
+	public void updateAutor(Autor autor)
 	{
-		return repositorioAutor.findById(id);
+		repositorioAutor.save(autor);
 	}
+	
+
 }

@@ -46,20 +46,43 @@ public class AutorController
 	@RequestMapping("/insertarAutor")
 	public String addAutor(Autor autor, Model model, HttpSession sesion)
 	{
-		//Buscar la lista de libros que tiene el autor
-		//Optional<Book> bookBuscado = serviceBook.findById(id);
-		List<Book> listadoDeLibros = (List<Book>) serviceBook.findAll();
-		
-		//Si todo es corecto, establecer la lista de libros para este autor
-//		if (bookBuscado.isPresent())  
-	//		autor.setListaDelibros(listadoDeLibros);
-//		else 
-	
 		// En esta opción No se dan de alta los libros
-		autor.setListaDelibros(null);		
 		
 		serviceAutor.insertAutor(autor);
 		
+		model.addAttribute("listaAutores", serviceAutor.findAll());
+		return "autores/listadoAutores.html";
+	}
+	
+	
+	@RequestMapping(value = "/modificaAutor")
+	public String modifyAutor(@RequestParam("autorId") Long idAutor, Model model, HttpSession sesion) 
+	{
+		Optional<Autor> autorOptional = serviceAutor.findById(idAutor);
+		
+		if (autorOptional.isPresent())
+		{
+			model.addAttribute("autorParaModifcar", autorOptional.get()); 		
+		
+			return "autores/webModificarAutor.html";
+		}	
+		else
+		{
+			model.addAttribute("listaAutores", serviceAutor.findAll());
+			return "autores/listadoAutores.html";
+		}
+	}
+	
+	@RequestMapping(value = "/updateAutor")
+	public String updateBook(Autor autorAmodificar, Model model, HttpSession sesion) 
+	{ 
+		Optional<Autor> autorOptional = serviceAutor.findById(autorAmodificar.getIdAutor());
+		
+		if (autorOptional.isPresent())
+			serviceAutor.updateAutor(autorAmodificar);
+		else
+			System.out.println("Mostrar No se ha podido modificar");					
+						
 		model.addAttribute("listaAutores", serviceAutor.findAll());
 		return "autores/listadoAutores.html";
 	}

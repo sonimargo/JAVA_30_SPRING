@@ -21,6 +21,11 @@ public class BookService
 		return repositorioBook.findAll();
 	}
 	
+	public Optional<Book> findById (long id) 
+	{
+		return repositorioBook.findById(id);
+	}
+	
 	public void insertBook(Book book) 
 	{
 		repositorioBook.save(book);
@@ -36,10 +41,7 @@ public class BookService
 		repositorioBook.save(book);
 	}
 	
-	public Optional<Book> findById (long id) 
-	{
-		return repositorioBook.findById(id);
-	}
+
 
 	
 }
