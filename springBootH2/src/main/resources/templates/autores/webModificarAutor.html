@@ -1,98 +1,133 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/inicio/layout}">
+
 <head>
 
 <style>
-	form { 
+	table 
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
 		margin:20px;
 		padding:10px;
 		border: 1px solid #1C6EA4;
-	    background-color: #EEEEEE;
-	  	width: 60%;
+	  	background-color: #EEEEEE;
+	  	width: 97%;
 	  	text-align: left;
 	  	border-collapse: collapse;
+	  	/*border: 1px solid black;*/
 	}
 	
+	th, td 
+	{
+	  padding: 15px;
+	  text-align: left;
+	}
+
 	.boton 
 	{
-        padding:10px 20px, 10px 20px; 
-        background: #1C6EA4;
+        /*padding:15px 30px, 15px 30px;*/
+        /* https://htmlcolorcodes.com/es/tabla-de-colores/ */
+        background-color: #F1948A;   
+        border: none;     
         color:white;
-        font:bold 10px/10px verdana;
-        width:100px;
-        height: 30px;
+        font-size: 16px;
+        padding: 14px 40px;
+        /*font:bold 14px/14px verdana;*/
+        width:200px;
+        height: 40px;
         cursor:pointer;
-        cursor:hand;
+        /*cursor:hand;*/        
         text-align:center;
+        text-decoration: none;
+        display: inline-block;
+        /*margin: 4px 2px;*/        
     }
     
-</style>
+    label 
+    { 
+    	display: block;
+    	width: 100px; 
+    }
+    
+    input1 
+    { 
+    	display: inline-block;
+    	width: 300px;
+  		height: 100px;
+  		padding: 5px;     	 
+    }
+    
+    input2 
+    { 
+    	display: inline-block; 
+    	width: 50px; 
+  		height: 100px;
+  		padding: 5px; 
+    }
 
+</style>
 
 </head>
 
-	<h2 align="center">BIBLIOTECA MINI</h2>
-	<p align="center">Modificar Autor</p>
-
+<div layout:fragment="content" style="text-align: center">
 					
 <body>
-	<form th:action="@{/GestionAutores/updateAutor}" 
-			th:object="${autorParaModifcar}">	  
+	<table>
+		<form th:action="@{/GestionAutores/updateAutor}" 
+				th:object="${autorParaModifcar}"
+				class="w3-container w3-card-4"
+				>	  
+
+		<h2 class="w3-text-blue">BIBLIOTECA MINI</h2>
+		<p >Modificar Autor</p>
 		
-		<label >Identificador</label>	
-		<input readonly name= "idAutor"
-				type="number"
-				th:field="*{idAutor}"
-				th:value="*{idAutor}" />
-	
-		<label for="txt_nombre">Nombre:</label>			
-		<input id="txt_nombre" 
-			   name=nombre
-			   type="text" 			    
-			   class="form-control"
-			   th:field="*{nombre}" 
-			   th:value="*{nombre}"  
-			   />
+		<tr>
+			<th>
+				<label class="w3-text-indigo">Identificador</label>	
+				<input readonly name= "idAutor"						
+						class="w3-input w3-border"
+						type="number"
+						th:field="*{idAutor}"
+						th:value="*{idAutor}" />
+			</th>
+			<th>
+				<label  class="w3-text-indigo"
+							for="txt_nombre">Nombre:</label>			
+				<input id="txt_nombre" 
+					   name=nombre
+					   type="text" 			    
+					   class="w3-input w3-border"
+					   th:field="*{nombre}" 
+					   th:value="*{nombre}"    />
+			</th>		
+			<th>
+				<label  class="w3-text-indigo"
+							for="txt_ape1">Apellido:</label>
+				<input id="txt_ape1"
+						name="apellido1" 
+						type="text" 
+						class="w3-input w3-border"  
+						th:field="*{apellido1}"
+						th:value="*{apellido1}" 	/>
+			</th>
+		</tr>
 			
-		
-		<label for="txt_ape1">Primer Apellido:</label>
-		<input id="txt_ape1"
-				name="apellido1" 
-				type="text" 
-				class="form-control"  
-				th:field="*{apellido1}"
-				th:value="*{apellido1}" 	/>
-	
-<!--  		<div>
-			<label>Autor</label>
-			<select id="selectAutor"
-					name="autorId"				
-					class="form-control">								
-				<option value="" >Selecciona autor</option>							
-				<option th:each="autorFor : ${listaAutores}" 
-						th:value="${autorFor.idAutor}"
-						th:selected="(${autorFor.idAutor} == *{autor.IdAutor})"
-						th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' : '+${autorFor.apellido1}"
-						>
-				</option>
-			</select>	
-		</div>  -->
-			
-		<button type="submit" name= "btn_modificar" >Modificar Autor</button>
+		<tr>
+			<th>
+				<button class="w3-btn w3-indigo" 
+							type="submit" 
+							name= "btn_modificar" >Modificar Autor</button>
+			</th>
+			<th size="30"></th>
+		</tr>
 	</form>
-	
-	<!--  
-	<form>	
-			<a th:href="@{/GestionLibros/updateLibro(libro=${libroModify})}"
-					class="btn btn-danger btn-sm">MODIFICAR LIBRO</a>
-	</form>
-	-->
-			
-	<form>
-			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
-	</form>
-		
+	</table>
 	
 </body>
+</div>
 </html>

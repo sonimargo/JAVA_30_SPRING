@@ -1,5 +1,6 @@
 package dev.springBootH2.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,16 @@ public class BookService
 	public Optional<Book> findById (long id) 
 	{
 		return repositorioBook.findById(id);
+	}
+	
+//	public Optional<Book> findByTitol(String titulo)
+	//{
+		//return repositorioBook.findByTitle(titulo);
+	//}
+	
+	public List<Book> findByTituloLibro(String titulo)
+	{
+		return repositorioBook.findByTitle(titulo);
 	}
 	
 	public void insertBook(Book book) 

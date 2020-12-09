@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/inicio/layout}">
 
-<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -9,16 +12,26 @@
 <script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <style>
-	form { 
+	table , form 
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
 		margin:20px;
 		padding:10px;
 		border: 1px solid #1C6EA4;
-	    background-color: #EEEEEE;
-	  	width: 60%;
+	  	background-color: #EEEEEE;
+	  	width: 97%;
 	  	text-align: left;
 	  	border-collapse: collapse;
 	}
 	
+	table, td, th 
+	{
+  		border: 1px solid black;
+	}
+
+
 	.boton 
 	{
         padding:10px 20px, 10px 20px; 
@@ -32,33 +45,39 @@
         text-align:center;
     }
     
+	#btnHome 
+	{
+        position:absolute;
+        left: 5%;
+    }
 </style>
-
-
 </head>
 
-	<h2 align="center">BIBLIOTECA Mini</h2>
+<div layout:fragment="content" style="text-align: center">
+
+	<h2 align="center">BIBLIOTECA MINI</h2>
 	<p align="center">Alta nuevo Autor</p>
 			
-<body>
-	<form action="insertarAutor">
-	
-		<div class="form-group">
+	<body>
+		<form action="insertarAutor">
 		
-			<label for="txtnombre">Nombre:   </label> 
-			<input type="text" name="nombre" class="form-control" id="txtnombre" />
-
 			<div class="form-group">
-				<label for="txtapellido">Apellido:  </label>
-				<input type="text" name="apellido1" class="form-control" id="txtapellido" />
-			</div>
-
 			
-			<div>
-				<input id="btnAltaAutor" class=boton type="submit" value="ALTA AUTOR"/>
+				<label for="txtnombre">Nombre:   </label> 
+				<input type="text" name="nombre" class="form-control" id="txtnombre" />
+	
+				<div class="form-group">
+					<label for="txtapellido">Apellido:  </label>
+					<input type="text" name="apellido1" class="form-control" id="txtapellido" />
+				</div>
+	
+				
+				<div>
+					<input id="btnAltaAutor" class=boton type="submit" value="ALTA AUTOR"/>
+				</div>
 			</div>
-		</div>
-
-	</form>
-</body>
+	
+		</form>
+	</body>
+</div>
 </html>

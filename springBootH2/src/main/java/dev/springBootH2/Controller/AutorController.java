@@ -30,9 +30,12 @@ public class AutorController
 
 	
 	@RequestMapping("/verListadoAutores")
-	public String showAutores(Model model)
+	public String showAutores(Model model, HttpSession sesion)
 	{
+		sesion.setAttribute("listadoAutores", serviceAutor.findAll());
+		
 		model.addAttribute("listaAutores", serviceAutor.findAll());
+		
 		return "autores/listadoAutores.html";
 	}
 	
@@ -53,6 +56,26 @@ public class AutorController
 		model.addAttribute("listaAutores", serviceAutor.findAll());
 		return "autores/listadoAutores.html";
 	}
+	
+	
+	@RequestMapping(value = "/buscarAutor")
+	public String buscaAutor(Model model, @RequestParam("autorNombre") String nombreAutor, HttpSession sesion)
+	{
+		
+		List<Autor> listaAutores = serviceAutor.findByNombreAutor(nombreAutor);
+		
+		if (listaAutores.isEmpty())
+		{
+			model.addAttribute("listaAutores", serviceAutor.findAll());
+		}
+		else
+		{
+			model.addAttribute("listaAutores", listaAutores);
+		}
+		
+		return "autores/listadoAutores.html";
+	}
+	
 	
 	
 	@RequestMapping(value = "/modificaAutor")

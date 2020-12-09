@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<!-- https://attacomsian.com/blog/spring-boot-thymeleaf-layouts -->
+
+<style>
+
+.footer 
+{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: green;
+	color: white;
+	text-align: center;
+}
+</style>
+
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE">My Company Name</title>
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+</head>
+
+<body>
+
+	<!-- Main Navigation-        CABECERA      -->
+	<div class="w3-container">
+	
+		<!-- Main Navigation-Bar -->
+		<div class="w3-bar w3-light-blue w3-border">
+
+			<a th:href="@{/biblioteca}" 
+				class="w3-bar-item w3-button w3-mobile">Home</a>
+
+			<a th:href="@{/GestionUsuarios/verListadoUsuarios}" 
+				class="w3-bar-item w3-button w3-mobile">Gestion Usuarios</a>
+
+			<a th:href="@{/GestionReservas/verListadoReservas}" 
+				class="w3-bar-item w3-button w3-mobile">Gestion Reservas</a>
+				
+			<a th:href="@{/GestionLibros/verListadoLibros}" 
+				class="w3-bar-item w3-button w3-mobile">Gestion Libros</a>
+
+			<a th:href="@{/GestionAutores/verListadoAutores}" 
+				class="w3-bar-item w3-button w3-mobile">Gestion Autores</a>
+
+			<a th:href="@{/GestionCitas/verListadoCitas}" 
+				class="w3-bar-item w3-button w3-mobile">Gestion Citas de Autor</a>
+
+		</div>
+	</div>
+	
+	
+	<!-- Content Section -->
+	<section layout:fragment="content">
+		<p>This is filled by the content template.</p>
+	</section>
+
+	<!-- Footer. Es el pie de la web -->
+	<footer>
+		<div class="footer">
+			<p>2020 Biblioteca Mini. All rights reserved.</p>
+			
+		</div>
+	</footer>
+
+	<!-- Optional Section -->
+	<th:block layout:fragment="optional" />				
+</body>
+</html>
+
+

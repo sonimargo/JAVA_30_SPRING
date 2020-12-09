@@ -34,14 +34,12 @@ public class BookController {
 		return "inicio/webHome.html";
 	}
 	
-	@RequestMapping("/verListaLibros")
+	@RequestMapping("/verListadoLibros")
 	public String showBooks(Model model, HttpSession sesion) 
 	{
 		sesion.setAttribute("listadoLibros", serviceBook.findAll());		
 			
 		model.addAttribute("listalibros", serviceBook.findAll());
-		
-		System.out.println("**************************************");
 		
 		return "libros/listadoLibros.html";
 	}
@@ -50,25 +48,54 @@ public class BookController {
 	@RequestMapping("/nuevoLibro")
 	public String addBook(Model model) 
 	{
-		//En werb hay un combo con los autores. Rellenar combo
-		model.addAttribute("comboAutores", serviceAutor.findAll());
+		//En web hay un combo con los autores. Rellenar combo
+		model.addAttribute("listaAutores", serviceAutor.findAll());
 		return "libros/webAddLibro.html";
 	}
 	
 	//Muestra la web de insertar libro, donde tenemos la opcion introducir los datos del libro
 	// guardar y volver a la web de LISTA LIBROS
 	@RequestMapping("/insertarLibro")
-	public String insertBook(Book libro, Model model, HttpSession sesion) 
+	public String insertBook(Book libro, @RequestParam("autorId") Long idAutor, Model model, HttpSession sesion) 
 	{
-		libro.setEstado(EstadoLibro.DISPONIBLE);
-		serviceBook.insertBook(libro);		
+		Optional<Autor> AutorOptional = serviceAutor.findById(idAutor);
 		
-		sesion.setAttribute("listadoLibros", serviceBook.findAll());		
+		if (AutorOptional.isPresent())
+		{
+			libro.setEstado(EstadoLibro.DISPONIBLE);
+			libro.setAutor(AutorOptional.get());
+			
+			serviceBook.insertBook(libro);				
+		}
+		
+		sesion.setAttribute("listadoLibros", serviceBook.findAll());
+		
+		model.addAttribute("listalibros", serviceBook.findAll());
+		
+		return "libros/listadoLibros.html";
+		
+	}
+	
+	
+	@RequestMapping(value = "/altaLibro")
+	public String altaBook(Model model, @RequestParam("libroId") Long idLibro, HttpSession sesion) 
+	{ 	
+		List<Book> listaLibros = (List<Book>) sesion.getAttribute("listadoLibros");
+		
+		int index = this.exists(idLibro, listaLibros);
+		
+		if (index != -1)
+		{
+			Book libro = listaLibros.get(index);
+			libro.setEstado(EstadoLibro.DISPONIBLE);
+			serviceBook.updateBook(libro);
+		}
 		
 		model.addAttribute("listalibros", serviceBook.findAll());
 		
 		return "libros/listadoLibros.html";
 	}
+	
 	
 	@RequestMapping(value = "/bajaLibro")
 	public String removeBook(Model model, @RequestParam("libroId") Long idLibro, HttpSession sesion) 
@@ -90,6 +117,27 @@ public class BookController {
 		return "libros/listadoLibros.html";
 	}
 	
+	
+	@RequestMapping(value = "/buscarLibro")
+	public String buscaBook(Model model, @RequestParam("libroTitulo") String tituloLibro, HttpSession sesion) 
+	{ 
+		List<Book> listaLibros = serviceBook.findByTituloLibro(tituloLibro);
+		
+		if (listaLibros.isEmpty())
+		{
+			model.addAttribute("listalibros", serviceBook.findAll());	
+		}	
+		else
+		{
+			model.addAttribute("listalibros", listaLibros);
+		}
+		
+		
+		
+		return "libros/listadoLibros.html";
+		
+	}
+	
 	//Metodo que nos llevará a la web de modificar, con los datos del libro
 	@RequestMapping(value = "/modificaLibro")
 	public String modifyBook(@RequestParam("libroId") Long idLibro, Model model, HttpSession sesion) 
@@ -97,9 +145,19 @@ public class BookController {
 		Optional<Book> libroOptional = serviceBook.findById(idLibro);
 		
 		if (libroOptional.isPresent())
-		{
-			model.addAttribute("libroParaModifcar", libroOptional.get()); 		
-			model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
+		{			
+			model.addAttribute("libroParaModifcar", libroOptional.get());
+			
+			if ((libroOptional.get().getAutor()) == null)
+			{
+				System.out.println("************************* autorid null************************************");
+				model.addAttribute("autorId", 0);
+			}
+			else
+			{
+				System.out.println("************************* autorid ************************************"+ libroOptional.get().getAutor().toString());
+				model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
+			}
 			
 			/* SIEMPRE PASA POR NULL
 			 * 

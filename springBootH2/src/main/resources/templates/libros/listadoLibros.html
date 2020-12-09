@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/inicio/layout}">
+
 <head>
 
-<link rel="stylesheet" href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
-<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
-<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-
 <!-- padding espacio arriba/dcha/abajo/izq #502121-->
+<!-- background: #1C6EA4; -->
 
 <style>
 	table , form 
@@ -16,103 +16,183 @@
 		font-style: normal;
 		font-size: 12pt;
 		margin:20px;
-		padding:10px;
+		padding:5px;
 		border: 1px solid #1C6EA4;
 	  	background-color: #EEEEEE;
-	  	width: 80%;
+	  	width: 97%;
 	  	text-align: left;
 	  	border-collapse: collapse;
 	}
 	
+	td, th 
+	{	
+  		border: 1px solid black;
+  		border-collapse: collapse;
+  		padding: 5px;
+	}
+
+	tabla
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
+		display: table;
+  		border-collapse: separate;
+  		border-style: none;
+        border-width: 0;
+	}
+	
+	tr2, th2
+	{
+	    border-width: 0;
+	    padding: 5px;
+	}
 	
 	.boton 
 	{
-        padding:10px 20px, 10px 20px; 
-        background: #1C6EA4;
+        /*padding:15px 30px, 15px 30px;*/        
+        border: none;     
         color:white;
-        font:bold 10px/10px verdana;
-        width:100px;
-        height: 30px;
+        font-size: 16px;
+        padding: 14px 40px;
+        /*font:bold 14px/14px verdana;*/
+        width:300px;   /*ancho*/
+        height: 50px;  /*alto*/
         cursor:pointer;
-        cursor:hand;
+        /*cursor:hand;*/        
         text-align:center;
+        text-decoration: none;        
+        /*margin: 4px 2px;*/        
     }
-    
-	#btnHome 
+
+	.boton1 
 	{
-        position:absolute;
-        left: 5%;
-    }
-        
-    #btnNewBook 
+		background-color: #4CAF50;   /* Green */
+		padding: 14px 40px;		
+		display: inline-block;
+	}
+	
+	.boton2 
 	{
-        position:absolute;
-        left: 20%;
-    }
-        
+		background-color: #008CBA;    /* Blue */
+		padding: 14px 40px;	
+		display: inline-block;	
+	}
+	
+	.boton3 
+	{
+		background-color: #4CAF50;   /* Green */
+		padding: 14px 40px;
+		display: inline-block;
+	}
+     
+    .texto 
+	{
+		padding: 5px 10px;
+		display: block;
+		width:500px;
+        height: 50px;
+	}
+	   
 </style>
-
 </head>
-	<h2 align="center">BIBLIOTECA MINI</h2>
-	<p align="center">LISTA DE LIBROS EN BIBLIOTECA</p>
-		
-<div style="text-align: center">		
-		
-<body>
-	<table>
-	
-		<tr>
-			<th>id</th>
-			<th>Title</th>
-			<th>ISBN</th>
-			<th>Paginas</th>
-			<th>Anyo</th>	
-			<th>Autor</th>
-			<th>Estado</th>
-			<th>Accion</th>
-		</tr>
-		<tr th:each="book:${listalibros}">
-			<td th:text="${book.idBook}"></td>
-			<td th:text="${book.title}"></td>
-			<td th:text="${book.ISBN}"></td>
-			<td th:text="${book.pages}"></td>
-			<td th:text="${book.year}"></td>
 			
-	  		<td th:if="${book.autor} != null"
-				th:text="${book.autor.nombre} +' ' + ${book.autor.apellido1} ">
-				th:unless="${book.autor} == null"
-				th:text="Falta asignar Autor"
-				>
-			</td>
+
+<div layout:fragment="content" style="text-align: center">		
+	<body>
+
+		<h2 align="center">BIBLIOTECA MINI</h2>
+		<p align="center">LISTA DE LIBROS EN BIBLIOTECA</p>
+
+			<!-- 	BOTON PARA LIKAR A LA WERB PRINCIPAL/ CON LAYOUT EL LINK ESTÁ EN LA BARRA DE MENU
+			<form>
+				<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+			</form> -->
+					
+		<table class="w3-border-0" >
+					
+			<tr class="w3-border-0" >
 			
+				<form action="verListadoLibros">
+					<th class="w3-border-0" >					
+						<input id="btnVerBooks" 
+								class="boton boton2"
+								type="submit" 
+								value="Listado de Libros"/>
+					
+					</th>
+				</form>
+				
+				<form action="nuevoLibro">
+					<th  class="w3-border-0">				
+						<input id="btnNewBook" 
+								class="boton boton1"
+								type="submit" 
+								value="Nuevo Libro"/>					
+					</th>
+				</form>
+				
+				<form action="buscarLibro">
+					<th  class="w3-border-0">										
+							<input id="btnBuscarBook" 
+									class="boton boton3" 
+									type="submit" 
+									value="Buscar Libro por Titulo"/>
+					</th>
+				
+				</tr>
+					<tr  class="w3-border-0">
+						<th class="w3-border-0"></th>
+						<th class="w3-border-0"></th>
+						<th  class="w3-border-0">				
+									<input id="txtBuscarBook" 
+											class="w3-input w3-border texto"  
+											type="text"
+											name="libroTitulo"
+											autofocus 	  
+											/>				
+							</th>
+					</tr>
+				</form>
+		</table>
+		<table>
+		
+			<tr style="background-color:lightblue">
+				<th>id</th>
+				<th>TITULO</th>
+				<th>ISBN</th>
+				<th>PAGINAS</th>
+				<th>ANYO</th>									
+				<th>AUTOR</th>
+				<th>ESTADO</th>
+				<th>Modificar</th>
+				<th>Baja</th>
+				<th>Alta</th>
+			</tr>
 			
-			<td th:text="${book.estado}"></td>			
-			<td><a th:href="@{/GestionLibros/bajaLibro(libroId=${book.idBook})}">Dar baja el libro</a></td>			
-			<td><a th:href="@{/GestionLibros/modificaLibro(libroId=${book.idBook})}">Modificar libro</a></td>
-		</tr>
-	</table>
-
-
-</body>
+			<tr th:each="book:${listalibros}">
+				<td th:text="${book.idBook}"></td>
+				<td th:text="${book.title}"></td>
+				<td th:text="${book.ISBN}"></td>
+				<td th:text="${book.pages}"></td>
+				<td th:text="${book.year}"></td>
+		  		<td>
+		  			<span th:if="${book.autor != null}"
+						  th:text="${book.autor.nombre} +' ' + ${book.autor.apellido1} " </span>
+					<span th:unless="${book.autor == null}"
+							th:text="Asignar Autor"</span>					
+				</td>
+				<td th:text="${book.estado}"></td>
+									
+				<td><a th:href="@{/GestionLibros/modificaLibro(libroId=${book.idBook})}">Modificar libro</a></td>
+				<td><a th:href="@{/GestionLibros/bajaLibro(libroId=${book.idBook})}">Dar baja el libro</a></td>
+				<td><a th:href="@{/GestionLibros/altaLibro(libroId=${book.idBook})}">Alta del libro</a></td>
+								
+			</tr>
+		</table>
+	</body>
 
 	
-	<table>
-	
-		<form>
-			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
-		</form>
-		
-		<!--  
-		<form action="home">
-			<input id="btnHome" class=boton type="submit" value="Home"/>
-		</form>
-		-->
-		
-		<form action="nuevoLibro">
-			<input id="btnNewBook" class=boton type="submit" value="Nuevo Libro"/>
-		</form>
-	
-	</table>
 </div>
 
 </html>

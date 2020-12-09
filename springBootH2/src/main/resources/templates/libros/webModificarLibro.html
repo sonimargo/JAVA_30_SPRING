@@ -1,19 +1,38 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/inicio/layout}">
+
 <head>
+<link rel="stylesheet"
+	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="/webjars/jquery/3.0.0/jquery.min.js"></script>
+<script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <style>
-	form { 
+	table , form 
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
 		margin:20px;
 		padding:10px;
 		border: 1px solid #1C6EA4;
-	    background-color: #EEEEEE;
-	  	width: 60%;
+	  	background-color: #EEEEEE;
+	  	width: 97%;
 	  	text-align: left;
 	  	border-collapse: collapse;
 	}
 	
+	table, td, th 
+	{
+  		border: 1px solid black;
+	}
+
+
 	.boton 
 	{
         padding:10px 20px, 10px 20px; 
@@ -27,95 +46,131 @@
         text-align:center;
     }
     
+	#btnHome 
+	{
+        position:absolute;
+        left: 5%;
+    }
 </style>
 
 
 </head>
 
-	<h2 align="center">BIBLIOTECA MINI</h2>
-	<p align="center">Modifcar Libro</p>
+<div layout:fragment="content" style="text-align: center">
 					
 <body>
-	<form th:action="@{/GestionLibros/updateLibro}" 
-			th:object="${libroParaModifcar}">	  
-		
-		<label >Identificador</label>	
-		<input readonly name= "idBook"
-				type="number"
-				th:field="*{idBook}"
-				th:value="*{idBook}" />
-	
-		<label for="txt_title">Titulo:</label>			
-		<input id="txt_title" 
-			   name=title
-			   type="text" 			    
-			   class="form-control"
-			   th:field="*{title}" 
-			   th:value="*{title}"  
-			   />
-			
-		
-		<label for="txt_ISBN">ISBN:</label>
-		<input id="txt_ISBN"
-				name="ISBN" 
-				type="text" 
-				class="form-control"  
-				th:field="*{ISBN}"
-				th:value="*{ISBN}" 	/>
-		
-		<label for="txt_pages">Paginas:</label>
-		<input  id="txt_pages"
-				name="pages" 
-				type="number"  
-				class="form-control"  
-				th:field="*{pages}"
-				th:value="*{pages}" />
-		
-		<label for="txt_year">Any:</label>
-		<input id="txt_year" 
-				name="year"
-				type="number"  
-				class="form-control"  
-				th:field="*{year}"
-				th:value="*{year}"	/>
 
-		<label for="txt_stats">Estado:</label>
-		<input id="txt_status"
-				name="estado" 
-				type="text"  
-				class="form-control"  
-				th:field="*{estado}"
-				th:value="*{estado}"	/>
+	<table>
+		<form th:action="@{/GestionLibros/updateLibro}" 
+				th:object="${libroParaModifcar}"
+				class="w3-container w3-card-4"
+				>	
+				  
+		<h2 class="w3-text-blue" >BIBLIOTECA MINI</h2>
+		<p >Modifcar Libro</p>
 
- 		<div>
-			<label>Autor</label>
-			<select id="selectAutor"
-					name="autorId"				
-					class="form-control">								
-				<option value="" >Selecciona autor</option>							
-				<option th:each="autorFor : ${listaAutores}" 
-						th:value="${autorFor.idAutor}"
-						th:selected="(${autorFor.idAutor} == *{autor.IdAutor})"
-						th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' : '+${autorFor.apellido1}"
-						>
-				</option>
-			</select>	
-		</div> 
-		
-		<button type="submit" name= "btn_modificar" >Modificar Libro</button>
-	</form>
-	
-	<!--  
-	<form>	
-			<a th:href="@{/GestionLibros/updateLibro(libro=${libroModify})}"
-					class="btn btn-danger btn-sm">MODIFICAR LIBRO</a>
-	</form>
-	-->
+			<tr>
+				<td>
+					<label class="w3-text-indigo" >Identificador</label>	
+					<input readonly 
+							name= "idBook"
+							type="number"
+							class="w3-input w3-border"
+							th:field="*{idBook}"
+							th:value="*{idBook}" />
+				</td>
+				
+				<td>			
+					<label class="w3-text-indigo" 
+								for="txt_title">Titulo:</label>			
+					<input id="txt_title" 
+						   name=title
+						   type="text" 	
+						   class="w3-input w3-border"		    
+						   th:field="*{title}" 
+						   th:value="*{title}"  
+						   />
+				</td>
+			</tr>			
 			
-	<form>
-			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
-	</form>
-		
-	
+			<tr>
+				<td>
+					<label class="w3-text-indigo" 
+								for="txt_ISBN">ISBN:</label>
+					<input id="txt_ISBN"
+							name="ISBN" 
+							type="text" 
+							class="w3-input w3-border" 
+							th:field="*{ISBN}"
+							th:value="*{ISBN}" 	/>
+				</td>
+				<td>
+					<label class="w3-text-indigo" 
+								for="txt_pages">Paginas:</label>
+					<input  id="txt_pages"
+							name="pages" 
+							type="number"  
+							class="w3-input w3-border" 
+							th:field="*{pages}"
+							th:value="*{pages}" />
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<label class="w3-text-indigo" 
+								for="txt_year">Any:</label>
+					<input id="txt_year" 
+							name="year"
+							type="number" 
+							class="w3-input w3-border"  
+							th:field="*{year}"
+							th:value="*{year}"	/>
+				</td>
+				<td>
+					<label class="w3-text-indigo" 
+								for="txt_stats">Estado:</label>
+					<input id="txt_status"
+							name="estado" 
+							type="text"  
+							class="w3-input w3-border" 
+							th:field="*{estado}"
+							th:value="*{estado}"	/>
+				</td>
+			</tr>
+			
+			<tr>
+				<td></td>
+				<td>
+			 		<div th:object="${autor}">
+						<label class="w3-text-indigo">Autor</label>
+						<select id="selectAutor"
+								name="autorId"	
+								class="w3-select" 			
+								>								
+							<option th:value="0" >Selecciona autor</option>							
+							<option th:each="autorFor : ${listaAutores}" 
+									th:value="${autorFor.idAutor}"						
+									th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' '+${autorFor.apellido1}"
+									>
+							</option>
+						</select>	
+					</div> 
+				</td>
+			</tr>
+			
+			<tr>
+				<td>
+					<button class="w3-btn w3-indigo" 
+							type="submit" 
+							name= "btn_modificar" >Modificar Libro</button>
+								
+				</td>
+				<td size="30"></td>
+			</tr>
+		</form>
+	</table>
+
 </body>
+</div>
 </html>

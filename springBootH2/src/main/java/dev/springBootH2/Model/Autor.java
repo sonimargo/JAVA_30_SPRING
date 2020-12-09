@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name="AUTORES")
@@ -36,12 +38,15 @@ public class Autor
 				cascade = CascadeType.ALL)
     private List<Book> listaDelibros;
 	
-	// HACER. lista de citas de autor: 1 autor N citas
-	/*
-	 * @OneToMany(mappedBy = "autorCita", fetch = FetchType.LAZY, cascade =
-	 * CascadeType.ALL) //@JsonIgnore private List<Cita> ListaDeCitas;
-	 */
+	@OneToMany(mappedBy = "autorCita", 
+				fetch = FetchType.LAZY, 
+				cascade = CascadeType.ALL) 
+	@JsonIgnore 
+	private List<Cita> ListaDeCitas;
+	 
 	
+
+
 	public Autor() 
 	{
 		super();
@@ -93,17 +98,16 @@ public class Autor
 	}
 
 	
-	
+	public List<Cita> getListaDeCitas() {
+		return ListaDeCitas;
+	}
+
+	public void setListaDeCitas(List<Cita> listaDeCitas) {
+		ListaDeCitas = listaDeCitas;
+	}
 	
 	
 
-	//OBSOLETO: Añadir la cita a la lista y ESTABLECER el autor para esta cita
-	//Se establece con setListaDeCitas
-	//
-	/*
-	 * public void addCitas (Cita cita) { ListaDeCitas.add(cita);
-	 * cita.setAutor(this); }
-	 */
 	
 	
 	

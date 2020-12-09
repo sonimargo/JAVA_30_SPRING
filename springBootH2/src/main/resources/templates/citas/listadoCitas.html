@@ -106,77 +106,94 @@
 </head>
 
 <div layout:fragment="content" style="text-align: center">
-		
+						
 	<body>
-		<h2 align="center">BIBLIOTECA Mini</h2>
-		<p align="center">Gestion de Autores</p>
-	
+		<h2 align="center">BIBLIOTECA MINI</h2>
+		<p align="center">Listado de Citas de Autor</p>
+
 		<table class="w3-border-0" >
 		
 			<tr class="w3-border-0" >
 
-				<form action="verListadoAutores">
+				<form action="verListadoCitas">
 					<th class="w3-border-0" >					
-						<input id="btnVerAutors" 
+						<input id="btnVerCitas" 
 								class="boton boton2"
 								type="submit" 
-								value="Listado de Autores"/>
-					
+								value="Listado de Citas"/>					
 					</th>
 				</form>
 			
-				<form action="nuevoAutor">
+				<form action="nuevaCita">
 					<th class="w3-border-0" >
-						<input id="btnNewAutor" 
+						<input id="btnNewCita" 
 								class="boton boton2" 
 								type="submit" 
-								value="Nuevo Autor"/>
+								value="Nueva Cita"/>
 					</th>
 				</form>
 				
-				<form action="buscarAutor">
+				<form action="buscarCita">
 					<th  class="w3-border-0">										
-							<input id="btnBuscarAutor" 
+							<input id="btnBuscarCita" 
 									class="boton boton3" 
 									type="submit" 
-									value="Buscar Autor por Nombre"/>
+									value="Buscar Cita"/>
 					</th>
 				
 			</tr>
 			<tr  class="w3-border-0">
-						<th class="w3-border-0"></th>
-						<th class="w3-border-0"></th>
-						<th  class="w3-border-0">				
-									<input id="txtBuscarAutor" 
-											class="w3-input w3-border texto"  
-											type="text"
-											name="autorNombre"
-											autofocus 	  
-											/>				
-							</th>
-					</tr>
-				</form>
+				<th class="w3-border-0"></th>
+				<th class="w3-border-0"></th>
+				<th  class="w3-border-0">				
+					<input id="txtBuscarCita" 
+							class="w3-input w3-border texto"  
+							type="text"
+							name="autorCita"
+							autofocus 	  
+							/>				
+				</th>
+			</tr>
+			</form>
 				
-			</tr>
-		</table>	
-		
-		<table>
-			<tr style="background-color:lightblue">
-				<th>ID_AUTOR</th>
-				<th>NOMBRE</th>
-				<th>APELLIDO</th>	
-				<th>Modificar</th>
-			</tr>
-			
-			<tr th:each="autor:${listaAutores}">
-				<td th:text=${autor.idAutor}></td>
-				<td th:text="${autor.nombre}"></td>
-				<td th:text="${autor.apellido1}"></td>
-				<td><a th:href="@{/GestionAutores/modificaAutor(autorId=${autor.idAutor})}">Modificar Autor</a></td>
 			</tr>
 		</table>
 		
+		<table>
+			<tr style="background-color:lightblue">
+				<th>ID_CITA</th>
+				<th>CITA</th>
+				<th>AUTOR</th>	
+				<th>Modificar</th>
+				<th>Eliminar</th>
+			</tr>
+			
+			<tr th:each="citaFor:${listaCitas}">				
+				<td th:text=${citaFor.idCita}></td>
+				<td th:text="${citaFor.textoCita}"></td>				
+				<td>
+		  			<span th:if="${citaFor.autorCita != null}"
+						  	th:text="${citaFor.autorCita.nombre} +' ' + ${citaFor.autorCita.apellido1} " </span>
+					<span th:unless="${citaFor.autorCita == null}"
+							th:text="Asignar Autor"</span>					
+				</td>
+				
+				<td><a th:href="@{/GestionCitas/modificaCita(citaId=${cita.idCita})}">Modificar Cita</a></td>
+				<td><a th:href="@{/GestionCitas/eliminarcita(citaId=${cita.idCita})}">EliminarCita </a></td> 
+			</tr>
+		</table>
 	</body>
-</div>
+	
+		<table>
+	
+<!-- 	BOTON PARA LIKAR A LA WERB PRINCIPAL/ CON LAYOUT EL LINK ESTÁ EN LA BARRA DE MENU
+		<form>
+			<input class="boton" type="button" value="Web inicio" onclick="window.location.href='/biblioteca'" />
+		</form> -->
+		
 
+	
+	</table>
+	
+</div>
 </html>

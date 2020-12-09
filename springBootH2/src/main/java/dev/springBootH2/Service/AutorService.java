@@ -1,5 +1,6 @@
 package dev.springBootH2.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,13 @@ public class AutorService
 	{
 		return repositorioAutor.findById(id);
 	}
+	
+	public List<Autor> findByNombreAutor(String nombre)
+	{
+		return repositorioAutor.findByNombre(nombre);
+	}
+	
+	
 	
 	public void insertAutor(Autor autor) 
 	{

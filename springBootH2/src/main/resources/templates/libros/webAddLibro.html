@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/inicio/layout}">
+
 <head>
 <link rel="stylesheet"
 	href="/webjars/bootstrap/4.2.1/css/bootstrap.min.css">
@@ -8,16 +11,26 @@
 <script src="/webjars/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 
 <style>
-	form { 
+	table , form 
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
 		margin:20px;
 		padding:10px;
 		border: 1px solid #1C6EA4;
-	    background-color: #EEEEEE;
-	  	width: 60%;
+	  	background-color: #EEEEEE;
+	  	width: 97%;
 	  	text-align: left;
 	  	border-collapse: collapse;
 	}
 	
+	table, td, th 
+	{
+  		border: 1px solid black;
+	}
+
+
 	.boton 
 	{
         padding:10px 20px, 10px 20px; 
@@ -31,50 +44,92 @@
         text-align:center;
     }
     
+	#btnHome 
+	{
+        position:absolute;
+        left: 5%;
+    }
 </style>
 
 
 </head>
 
-	<h2 align="center">BIBLIOTECA MINI</h2>
-	<p align="center">Alta nuevo Libro</p>
+<div layout:fragment="content" style="text-align: center">
 			
 <body>
-	<form action="insertarLibro">
-		<div class="form-group">
-			<label for="txttitle">Titulo:</label> 
-			<input type="text" name="title" class="form-control" id="txttitle" />
 
-			<div class="form-group">
-				<label for="txtISBN">ISBN:</label>
-				<input type="text" name="ISBN" class="form-control" id="txtISBN" />
-			</div>
-			<div class="form-group">
-				<label for="txtpages">Paginas:</label>
-				<input type="text" name="pages" class="form-control" id="txtpages" />
-			</div>
+	<table>
 
-			<div class="form-group">
-				<label for="txtyear">Any:</label>
-				<input type="text" name="year" class="form-control" id="txtyear" />
-			</div>
+		<form th:action="insertarLibro"
+				class="w3-container w3-card-4">
+
+			<h2 class="w3-text-blue">BIBLIOTECA MINI</h2>
+			<p >Alta nuevo Libro</p>
+		
+			<tr>
+				<td>
+					<label class="w3-text-indigo" 
+							for="txttitle">Titulo:</label> 
+					<input id="txttitle"							 
+							name="title"
+							type="text" 
+							class="w3-input w3-border" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label class="w3-text-indigo"
+							for="txtISBN">ISBN:</label>
+					<input id="txtISBN" 
+							name="ISBN"
+							type="text"
+							class="w3-input w3-border"	/>
+				</td>
+				<td>	
+					<label class="w3-text-indigo"
+							for="txtpages">Paginas:</label>
+					<input id="txtpages"
+							name="pages"
+							type="text" 							 
+							class="w3-input w3-border" />
+				</td>
+			</tr>
+			<tr>			
+				<td>	
+					<label class="w3-text-indigo"
+							for="txtyear">Any:</label>
+					<input id="txtyear"
+							name="year"
+							type="text" 
+							class="w3-input w3-border"	 />
+				</td>
+				<td>						
+					<div th:object="${autor}">
+						<label class="w3-text-black">Autor</label>
+						<select id="selectAutor" 
+								name="autorId"
+								class="w3-select" 
+								>
+							<option th:value="0">Selecciona Autor</option>
+							<option th:each="autorFor : ${listaAutores}" 
+							        th:value="${autorFor.idAutor}"
+							  		th:text="${autorFor.idAutor}+' '+${autorFor.nombre}+' '+${autorFor.apellido1}">
+							</option>
+						</select>	
+					</div>					
+			</tr>
+			<tr>
+				<td>
+						<button name="btnAltaLibro" 
+									class="w3-btn w3-indigo"
+									type="submit">ALTA LIBRO</button>
+									
+				</td>
+				<td size="30"></td>
+			</tr>
 			
-			<div th:object="${autor}">
-				<label>Seleccionar autor</label>
-				<select id="seleccionAutor" name="libroId">
-					<option th:value="0">No customer</option>
-					<option th:each="autor : ${comboAutores}" 
-					        th:value="${autor.idAutor}"
-					  		th:text="${autor.idAutor}+' : '+${autor.nombre}+' : '+${autor.apellido1}">
-					</option>
-				</select>	
-			</div>
-			
-			<div>
-				<input id="btnAltaLibro" class=boton type="submit" value="ALTA LIBRO"/>
-			</div>
-		</div>
-
-	</form>
+		</form>
+	</table>
 </body>
+</div>
 </html>

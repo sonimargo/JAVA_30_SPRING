@@ -20,12 +20,12 @@ public class Cita
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "IDCITA")
-	private Integer idCita;
+	private Long idCita;
 	
-	@Column(name = "CITA")
-	private String cita;
+	@Column(name = "TEXTOCITA")
+	private String textoCita;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "FK_AUTOR_ID", nullable = true)
 	@JsonIgnore
 	private Autor autorCita;
@@ -35,11 +35,10 @@ public class Cita
 	{
 	}
 
-	public Cita(Integer idCita, String cita) 
+	public Cita(String cita) 
 	{
 		super();
-		this.idCita = idCita;
-		this.cita = cita;
+		this.textoCita = cita;
 	}
 	
 	
@@ -49,23 +48,23 @@ public class Cita
 	
 	@Override
 	public String toString() {
-		return "Cita [idCita=" + idCita + ", cita=" + cita + ", autorCita=" + autorCita + "]";
+		return "Cita [idCita=" + idCita + ", cita=" + textoCita + ", autorCita=" + autorCita + "]";
 	}
 
-	public Integer getIdCita() {
+	public Long getIdCita() {
 		return idCita;
 	}
 
-	public void setIdCita(Integer idCita) {
+	public void setIdCita(Long idCita) {
 		this.idCita = idCita;
 	}
 
 	public String getCita() {
-		return cita;
+		return textoCita;
 	}
 
 	public void setCita(String cita) {
-		this.cita = cita;
+		this.textoCita = cita;
 	}
 
 	public Autor getAutor() 
