@@ -88,7 +88,8 @@
 						   type="text" 	
 						   class="w3-input w3-border"		    
 						   th:field="*{title}" 
-						   th:value="*{title}"  
+						   th:value="*{title}" 
+						   autofocus 
 						   />
 				</td>
 			</tr>			
@@ -148,10 +149,12 @@
 								name="autorId"	
 								class="w3-select" 			
 								>								
-							<option th:value="0" >Selecciona autor</option>							
+							<option th:value="0" >Selecciona autor</option>
+							<option th:value="${autor}" selected 
+										th:text="${autor.nombre}+' '+${autor.apellido1}" >
 							<option th:each="autorFor : ${listaAutores}" 
-									th:value="${autorFor.idAutor}"						
-									th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' '+${autorFor.apellido1}"
+										th:value="${autorFor.idAutor}"						
+										th:text="${autorFor.idAutor}+' : '+${autorFor.nombre}+' '+${autorFor.apellido1}"
 									>
 							</option>
 						</select>	
@@ -166,9 +169,24 @@
 							name= "btn_modificar" >Modificar Libro</button>
 								
 				</td>
-				<td size="30"></td>
+				
+				</form>
+				
+				<td>
+				<form th:action="@{/biblioteca}"
+					class="w3-container w3-card-4">
+			
+				
+					<button class="w3-btn w3-indigo" 
+							type="submit" 
+							name= "btn_modif" >Home</button>
+								
+				
+				</td>
+			
+				</form>
 			</tr>
-		</form>
+			
 	</table>
 
 </body>

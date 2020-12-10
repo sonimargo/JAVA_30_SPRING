@@ -150,26 +150,12 @@ public class BookController {
 			
 			if ((libroOptional.get().getAutor()) == null)
 			{
-				System.out.println("************************* autorid null************************************");
-				model.addAttribute("autorId", 0);
+				model.addAttribute("autor", 0);
 			}
 			else
 			{
-				System.out.println("************************* autorid ************************************"+ libroOptional.get().getAutor().toString());
-				model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
+				model.addAttribute("autor", libroOptional.get().getAutor());
 			}
-			
-			/* SIEMPRE PASA POR NULL
-			 * 
-			 * if ((libroOptional.get().getAutor().getIdAutor()) == null) {
-			 * model.addAttribute("autorId", 0); System.out.
-			 * println("************************************************************* autorid null ***********"
-			 * + (libroOptional.get().getAutor().getIdAutor())); } else {
-			 * model.addAttribute("autorId", libroOptional.get().getAutor().getIdAutor());
-			 * System.out.
-			 * println("************************************************************* autorid null ***********"
-			 * + (libroOptional.get().getAutor().getIdAutor())); }
-			 */
 			
 			model.addAttribute("listaAutores", serviceAutor.findAll());
 			return "libros/webModificarLibro.html";

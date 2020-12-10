@@ -41,7 +41,7 @@ public class Autor
 	@OneToMany(mappedBy = "autorCita", 
 				fetch = FetchType.LAZY, 
 				cascade = CascadeType.ALL) 
-	@JsonIgnore 
+	//@JsonIgnore 
 	private List<Cita> ListaDeCitas;
 	 
 	

@@ -27,7 +27,7 @@ public class Cita
 
 	@ManyToOne
 	@JoinColumn(name = "FK_AUTOR_ID", nullable = true)
-	@JsonIgnore
+	//@JsonIgnore
 	private Autor autorCita;
 		
 	
@@ -59,11 +59,11 @@ public class Cita
 		this.idCita = idCita;
 	}
 
-	public String getCita() {
+	public String getTextoCita() {
 		return textoCita;
 	}
 
-	public void setCita(String cita) {
+	public void setTextoCita(String cita) {
 		this.textoCita = cita;
 	}
 

@@ -168,15 +168,13 @@
 				<th>Eliminar</th>
 			</tr>
 			
-			<tr th:each="citaFor:${listaCitas}">				
-				<td th:text=${citaFor.idCita}></td>
-				<td th:text="${citaFor.textoCita}"></td>				
-				<td>
-		  			<span th:if="${citaFor.autorCita != null}"
-						  	th:text="${citaFor.autorCita.nombre} +' ' + ${citaFor.autorCita.apellido1} " </span>
-					<span th:unless="${citaFor.autorCita == null}"
-							th:text="Asignar Autor"</span>					
-				</td>
+			<tr th:each="cita:${listaCitas}">				
+				<td th:text=${cita.idCita}></td>
+				<td th:text="${cita.textoCita}"></td>				
+				
+				<td th:text="${cita.autor.nombre}"></td>
+				
+				
 				
 				<td><a th:href="@{/GestionCitas/modificaCita(citaId=${cita.idCita})}">Modificar Cita</a></td>
 				<td><a th:href="@{/GestionCitas/eliminarcita(citaId=${cita.idCita})}">EliminarCita </a></td> 

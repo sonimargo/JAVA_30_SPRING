@@ -32,7 +32,8 @@ public class CitasController
 	@RequestMapping("/inicio")
 	public String inicio(Model model) 
 	{
-		return "inicio/webHome.html";
+		//redirigir a otro contexto / controller
+		return "redirect:inicio/webHome.html";
 	}
 	
 	@RequestMapping("/verListadoCitas")
@@ -53,9 +54,12 @@ public class CitasController
 	@RequestMapping("/insertarCita")
 	public String insertCita(Cita cita, @RequestParam("autorId") Long idAutor, Model model, HttpSession sesion) 
 	{
+		System.out.println("******************************************** " + cita.getTextoCita());
+		System.out.println("******************************************** " );
+		System.out.println("******************************************** " );
+		
 		Optional<Autor> AutorOptional = serviceAutor.findById(idAutor);
 		
-		System.out.println("****************************************************************");
 		if (AutorOptional.isPresent())
 		{
 			cita.setAutor(AutorOptional.get());
