@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import dev.springBootH2.Service.AutorService;
 import dev.springBootH2.Service.BookService;
 import dev.springBootH2.Service.CitaService;
+import dev.springBootH2.Service.UsuarioService;
 
 @Controller
 public class HomeController 
@@ -29,6 +30,8 @@ public class HomeController
 	@Autowired
 	CitaService serviceCita;
 
+	@Autowired
+	UsuarioService serviceUsuario;
 	
 	// @RequestMapping  o  @GetMapping
 	@RequestMapping(value = { "/biblioteca" })	
@@ -47,8 +50,12 @@ public class HomeController
 	
 	
 	@GetMapping("/GestionUsuarios/verListadoUsuarios")
-	public String gestionarUsuarios() 
+	public String gestionarUsuarios(Model model, HttpSession sesion) 
 	{
+		sesion.setAttribute("listadoUsuarios", serviceUsuario.findAll());		
+		
+		model.addAttribute("listaUsuarios", serviceUsuario.findAll());
+
 		return "usuarios/listadoUsuarios.html";
 	}
 	

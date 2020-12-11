@@ -25,19 +25,23 @@ public class UsuarioService
 		return repositorioUsuario.findById(id);
 	}
 	
+	public Optional<Usuario> findByUsuario (String usuari) 
+	{
+		return repositorioUsuario.findByUsuario(usuari);
+	}	
 	
 	
-	public void insertReserva(Usuario usuario) 
+	public void insertUsuario(Usuario usuario) 
 	{
 		repositorioUsuario.save(usuario);
 	}
 	
-	public void deleteReserva(Usuario usuario) 
+	public void deleteUsuario(Usuario usuario) 
 	{
 		repositorioUsuario.delete(usuario);
 	}
 	
-	public void saveReserva(Usuario usuario) 
+	public void saveUsuario(Usuario usuario) 
 	{
 		repositorioUsuario.save(usuario);
 	}

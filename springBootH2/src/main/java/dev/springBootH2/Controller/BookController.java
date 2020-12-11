@@ -31,7 +31,7 @@ public class BookController {
 	@RequestMapping("/inicio")
 	public String inicio(Model model) 
 	{
-		return "inicio/webHome.html";
+		return "redirect: inicio/webHome.html";
 	}
 	
 	@RequestMapping("/verListadoLibros")

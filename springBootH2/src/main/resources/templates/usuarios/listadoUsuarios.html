@@ -17,7 +17,7 @@
 		font-style: normal;
 		font-size: 12pt;
 		margin:20px;
-		padding:10px;
+		padding:5px;
 		border: 1px solid #1C6EA4;
 	  	background-color: #EEEEEE;
 	  	width: 97%;
@@ -25,30 +25,76 @@
 	  	border-collapse: collapse;
 	}
 	
-	table, td, th 
-	{
+	td, th 
+	{	
   		border: 1px solid black;
+  		border-collapse: collapse;
+  		padding: 5px;
 	}
 
-
+	tabla
+	{
+		font-family: sans-serif;
+		font-style: normal;
+		font-size: 12pt;
+		display: table;
+  		border-collapse: separate;
+  		border-style: none;
+        border-width: 0;
+	}
+	
+	tr2, th2
+	{
+	    border-width: 0;
+	    padding: 5px;
+	}
+	
 	.boton 
 	{
-        padding:10px 20px, 10px 20px; 
-        background: #1C6EA4;
+        /*padding:15px 30px, 15px 30px;*/        
+        border: none;     
         color:white;
-        font:bold 10px/10px verdana;
-        width:100px;
-        height: 30px;
+        font-size: 16px;
+        padding: 14px 40px;
+        /*font:bold 14px/14px verdana;*/
+        width:300px;   /*ancho*/
+        height: 50px;  /*alto*/
         cursor:pointer;
-        cursor:hand;
+        /*cursor:hand;*/        
         text-align:center;
+        text-decoration: none;        
+        /*margin: 4px 2px;*/        
     }
-    
-	#btnHome 
+
+	.boton1 
 	{
-        position:absolute;
-        left: 5%;
-    }
+		background-color: #4CAF50;   /* Green */
+		padding: 14px 40px;		
+		display: inline-block;
+	}
+	
+	.boton2 
+	{
+		background-color: #008CBA;    /* Blue */
+		padding: 14px 40px;	
+		display: inline-block;	
+	}
+	
+	.boton3 
+	{
+		background-color: #4CAF50;   /* Green */
+		padding: 14px 40px;
+		display: inline-block;
+	}
+     
+    .texto 
+	{
+		padding: 5px 10px;
+		display: block;
+		width:500px;
+        height: 50px;
+	}
+	   
 </style>
 
 
@@ -61,9 +107,81 @@
 
 	<h2 class="w3-text-blue">BIBLIOTECA MINI</h2>
 	<p align="center">Listado de Usuarios</p>
-	<p align="center">Pendiente de desarrollar</p>					
+					
 
+		<table class="w3-border-0" >
+					
+			<tr class="w3-border-0" >
+			
+				<form action="verListadoUsuarios">
+					<th class="w3-border-0" >					
+						<input id="btnVerUsuarios" 
+								class="boton boton2"
+								type="submit" 
+								value="Listado de Usuarios"/>
+					
+					</th>
+				</form>
+				
+				<form action="nuevoUsuario">
+					<th  class="w3-border-0">				
+						<input id="btnNewUsuario" 
+								class="boton boton1"
+								type="submit" 
+								value="Nuevo Usuario"/>					
+					</th>
+				</form>
+				
+				<form action="buscarUsuario">
+					<th  class="w3-border-0">										
+							<input id="btnBuscarUsuario" 
+									class="boton boton3" 
+									type="submit" 
+									value="Buscar Usuario"/>
+					</th>
+				
+				</tr>
+					<tr  class="w3-border-0">
+						<th class="w3-border-0"></th>
+						<th class="w3-border-0"></th>
+						<th  class="w3-border-0">				
+									<input id="txtBuscarUsuario" 
+											class="w3-input w3-border texto"  
+											type="text"
+											name="usuari"
+											autofocus 	  
+											/>				
+							</th>
+					</tr>
+				</form>
+		</table>
+		<table>
+		
+			<tr style="background-color:lightblue">
+				<th>id</th>
+				<th>USUARIO</th>
+				<th>CONTRASENYA</th>
+				<th>ESTADO</th>
+				<th>Modificar</th>
+				<th>Baja</th>
+				<th>Alta</th>
+			</tr>
+			
+			<tr th:each="usuario:${listaUsuarios}">
+				<td th:text="${usuario.idUsuario}"></td>
+				<td th:text="${usuario.usuario}"></td>
+				<td th:text="${usuario.contrasenya}"></td>
+				<td></td>
+									
+				<td><a th:href="@{/GestionUsuarios/modificaUsuarios(libroId=${book.idBook})}">Modificar Usuario</a></td>
+				<td><a th:href="@{/GestionUsuarios/bajaUsuarios(libroId=${book.idBook})}">Dar baja al Usuario</a></td>
+				<td><a th:href="@{/GestionUsuarios/altaUsuarios(libroId=${book.idBook})}">Alta de Usuario</a></td>
+								
+			</tr>
+		</table>
+	</body>
 
-</body>
+	
 </div>
+
 </html>
